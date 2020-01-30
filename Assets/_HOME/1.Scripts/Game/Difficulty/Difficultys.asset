@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd0cff2ea60e3149a534ba7cea6646d, type: 3}
+  m_Name: Difficultys
+  m_EditorClassIdentifier: 
+  _difficulty:
+  - _name: Easy
+    _description: "A relaxing experience for beginners.\r\n\r\n\r\nPlayer:\r\nAll
+      Health: +50%\r\nAll Damage taken: -50%\r"
+    _sceneName: Map1
+    _id: 0
+    _image: {fileID: 21300000, guid: 038c290bac9e96d40a19d8b718c3cdaa, type: 3}
+    _healthModifier: 1.5
+    _dmgModifier: 1.5
+  - _name: Normal
+    _description: "Intermediate difficulty. The next step for those who want an adventure!\r\n\r\n-This
+      is how the game is meant to be played.\r"
+    _sceneName: Map1
+    _id: 1
+    _image: {fileID: 21300000, guid: d0f527e16a7863b4c8f1499dd46a544c, type: 3}
+    _healthModifier: 1
+    _dmgModifier: 1
+  - _name: Hard
+    _description: "Challenging difficulty for seasoned space travellers, who want
+      a bit of excitement. \r\n\r\nPlayer:\r\nAll Health: -50%\r\nAll Damage taken:
+      +50%\r"
+    _sceneName: Map1
+    _id: 2
+    _image: {fileID: 21300000, guid: 44585eedb82e0d6419ea7be21b47b45f, type: 3}
+    _healthModifier: 0.5
+    _dmgModifier: 0.5

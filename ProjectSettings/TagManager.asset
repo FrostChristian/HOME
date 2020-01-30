@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Building
+  - AISpawn
+  - HumanSpawn
+  - Unit
+  - IronRes
+  - AlloyRes
+  - Terrain
+  - Planet
+  - FoodEntity
+  - IronEntity
+  - AlloyEntity
+  - IronOreEntity
+  - BauxiteOreEntity
+  - Fire
+  - Projectors
+  - MiniMapCamera
+  - PlanetSpawn
+  - EnergyEntity
+  - DefenseEntity
+  - Ship
+  - Mine
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Terrain
+  - Units
+  - Buildings
+  - Ship
+  - Minimap
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
