@@ -13,7 +13,7 @@ namespace HOME.Game {
         private float _lifetime = 1f; // how long will transition take
         [SerializeField] private float _delay = 0.3f; // how long still we start fading off or on
         public float Delay { get { return _delay; } }
-        [SerializeField] private CanvasGroup _canvasToFade;
+        [SerializeField] private CanvasGroup _canvasToFade = default;
 
         [Header("Planet Movement")]
         public float speed = 10.0f;
@@ -21,10 +21,10 @@ namespace HOME.Game {
         private float startTime;
         private float journeyLength;
         [Space]
-        [SerializeField] private Transform _middleSpawnTransform;
+        [SerializeField] private Transform _middleSpawnTransform = default;
 
         [Header("Camera Movement")]
-        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private Camera _mainCamera = default;
         [SerializeField] private float lookAtDamping = 4.0f;    // Look at (rotational) damping. Lower value = smoother
         private float distance = 0f;    // depending on damping the distance will increase at speed)
         private float _higntOffset = 0f;    // Height for chase mode camera

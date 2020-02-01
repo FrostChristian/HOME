@@ -54,6 +54,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -123,6 +124,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -329,12 +331,12 @@ GameObject:
   - component: {fileID: 9117844593094647365}
   - component: {fileID: 9117844593094647386}
   - component: {fileID: -3856361506793819456}
-  - component: {fileID: 448744716}
-  - component: {fileID: 9117844593094647388}
+  - component: {fileID: -4090230582335363325}
   - component: {fileID: 8685686932538147366}
   - component: {fileID: 3718621499813081729}
   - component: {fileID: -6977536944322044894}
-  - component: {fileID: -4090230582335363325}
+  - component: {fileID: 448744716}
+  - component: {fileID: 9117844593094647388}
   m_Layer: 11
   m_Name: bShipPlayer
   m_TagString: Ship
@@ -384,6 +386,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -532,6 +535,82 @@ MonoBehaviour:
   ghostBuildingPrefab: {fileID: 1349451078359877867, guid: 0a2292b3b0cb7d04f807eb755bfceb3a,
     type: 3}
   maxBuildDistance: 50
+--- !u!114 &-4090230582335363325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441206529686424066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabEntity: {fileID: 0}
+  icon: {fileID: 21300000, guid: 863d7417d3525cf498c23fd242242aa3, type: 3}
+  buildingPrefab: {fileID: 4285405710652922097, guid: 118082af91c2f214c8ebeb0537b6d085,
+    type: 3}
+  ghostBuildingPrefab: {fileID: 4285405710652922097, guid: d5e7a7392630fad43b1b8dc4e4380aee,
+    type: 3}
+  maxBuildDistance: 50
+--- !u!114 &8685686932538147366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441206529686424066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabEntity: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6e8a304b3193ded4ea669831776328ed, type: 3}
+  buildingPrefab: {fileID: 5204620595141767473, guid: a81fc7e622895464da867028b876d866,
+    type: 3}
+  ghostBuildingPrefab: {fileID: 5204620595141767473, guid: 5ca71d952e892ea40a564ec4234e46dc,
+    type: 3}
+  maxBuildDistance: 50
+--- !u!114 &3718621499813081729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441206529686424066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabEntity: {fileID: 0}
+  icon: {fileID: 21300000, guid: c2b5df7a2922c8148bbbbe53a95ddfc8, type: 3}
+  buildingPrefab: {fileID: 2683630034804716684, guid: fa491fd1d23d0bb4aba79a3bfb800dfa,
+    type: 3}
+  ghostBuildingPrefab: {fileID: 2683630034804716684, guid: 6c9cff212718ea340ba8471acc5378bc,
+    type: 3}
+  maxBuildDistance: 50
+--- !u!114 &-6977536944322044894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441206529686424066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabEntity: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0f5654cd6c692514695e374758520912, type: 3}
+  buildingPrefab: {fileID: 8628666377290203766, guid: 372f84be1cc397a4ab6a4333fa389797,
+    type: 3}
+  ghostBuildingPrefab: {fileID: 8628666377290203766, guid: ca6dc1e513975664cb16982f46ec2cce,
+    type: 3}
+  maxBuildDistance: 50
 --- !u!114 &448744716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,82 +676,6 @@ MonoBehaviour:
   _selected: 0
   spawnPoint: {fileID: 6951558964580100016}
   _questManager: {fileID: 0}
---- !u!114 &8685686932538147366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441206529686424066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabEntity: {fileID: 0}
-  icon: {fileID: 21300000, guid: 6e8a304b3193ded4ea669831776328ed, type: 3}
-  buildingPrefab: {fileID: 5204620595141767473, guid: a81fc7e622895464da867028b876d866,
-    type: 3}
-  ghostBuildingPrefab: {fileID: 5204620595141767473, guid: 5ca71d952e892ea40a564ec4234e46dc,
-    type: 3}
-  maxBuildDistance: 50
---- !u!114 &3718621499813081729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441206529686424066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabEntity: {fileID: 0}
-  icon: {fileID: 21300000, guid: c2b5df7a2922c8148bbbbe53a95ddfc8, type: 3}
-  buildingPrefab: {fileID: 2683630034804716684, guid: fa491fd1d23d0bb4aba79a3bfb800dfa,
-    type: 3}
-  ghostBuildingPrefab: {fileID: 8628666377290203766, guid: ca6dc1e513975664cb16982f46ec2cce,
-    type: 3}
-  maxBuildDistance: 50
---- !u!114 &-6977536944322044894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441206529686424066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabEntity: {fileID: 0}
-  icon: {fileID: 21300000, guid: 0f5654cd6c692514695e374758520912, type: 3}
-  buildingPrefab: {fileID: 8628666377290203766, guid: 372f84be1cc397a4ab6a4333fa389797,
-    type: 3}
-  ghostBuildingPrefab: {fileID: 8628666377290203766, guid: ca6dc1e513975664cb16982f46ec2cce,
-    type: 3}
-  maxBuildDistance: 50
---- !u!114 &-4090230582335363325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441206529686424066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc31c28470915a64783424882d0cf309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabEntity: {fileID: 0}
-  icon: {fileID: 21300000, guid: 63c4adcef3f66034cba1bb1f42717714, type: 3}
-  buildingPrefab: {fileID: 4285405710652922097, guid: 118082af91c2f214c8ebeb0537b6d085,
-    type: 3}
-  ghostBuildingPrefab: {fileID: 4285405710652922097, guid: d5e7a7392630fad43b1b8dc4e4380aee,
-    type: 3}
-  maxBuildDistance: 50
 --- !u!1 &9082092306964070363
 GameObject:
   m_ObjectHideFlags: 0

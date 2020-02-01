@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SolarFarmScript : MonoBehaviour {
     [Header("Tilting")]
-    [SerializeField] GameObject panels;
+    [SerializeField] GameObject panels = default;
     [SerializeField] public float maxTiltAngle = 30f; //desired angle
     [SerializeField] public float minTiltAngle = -30f;
     [Space]
-    [SerializeField] public float currentTiltSpeed;
+    [SerializeField] public float currentTiltSpeed = default;
     [SerializeField] public float maxTiltSpeed = 1f;
     [SerializeField] public float minTiltSpeed = 0f;
     [SerializeField] public float accelerateTiltSpeed = .5f;
@@ -18,8 +18,8 @@ public class SolarFarmScript : MonoBehaviour {
 
 
     [Header("Rotation")]
-    [SerializeField] GameObject gears;
-    [SerializeField] private float currentRotationSpeed;
+    [SerializeField] GameObject gears = default;
+    [SerializeField] private float currentRotationSpeed = default;
     [SerializeField] public float maxRotationSpeed = 1f;
     [SerializeField] public float minRotationSpeed = 0f;
     [SerializeField] public float accelerateRotaSpeed = 0.1f;

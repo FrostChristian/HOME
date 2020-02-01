@@ -8,8 +8,8 @@ namespace HOME.Game {
 
         [Header("Attack Attributes")]
         [SerializeField] private List<Transform> _projectileSpawnPoint = new List<Transform>();
-        [SerializeField] private GameObject _procetilePrefab;
-        [SerializeField] private GameObject _impactEffect;
+        [SerializeField] private GameObject _procetilePrefab = default;
+        [SerializeField] private GameObject _impactEffect = default;
 
         [SerializeField] private float _attackDamage = 1f;//dmg
         [SerializeField] private float _attackRate = 2f;
@@ -19,8 +19,8 @@ namespace HOME.Game {
         [SerializeField] private float _findNewTargetCooldown = 1; //find a new target after this time
 
         [Header("Rotation")]
-        [SerializeField] private Transform _Rotation;
-        [SerializeField] private Transform _Pivot;
+        [SerializeField] private Transform _Rotation = default;
+        [SerializeField] private Transform _Pivot = default;
         [SerializeField] private float _turnSpeed = 10f;
 
         [Header("Rocket Launcher")]
@@ -31,14 +31,14 @@ namespace HOME.Game {
 
 
         [Header("Show Unity Info")]
-        [SerializeField] private Transform _target; // what are we shooting at
-        [SerializeField] private Entity _targetInfo; // what are we shooting at
+        [SerializeField] private Transform _target = default; // what are we shooting at
+        [SerializeField] private Entity _targetInfo = default; // what are we shooting at
 
         private PlayerSetupDefinition _player; //who is this player
         private float _currentFindTargetCooldown = 0f; //time passed since we found target and shot
 
         private GameManager _gameManager;
-        [SerializeField] private bool rocketLauncher;
+        [SerializeField] private bool rocketLauncher = default;
 
 
         void Start() {
@@ -110,7 +110,7 @@ namespace HOME.Game {
             }
             float shortestDistance = Mathf.Infinity;
             GameObject nearestEnemy = null;
-            foreach (var player in _gameManager.Factions) { // look for the players units
+            foreach (var player in _gameManager.activePlayers) { // look for the players units
                 if (player == _player) {
                     continue; //skip rest of code
                 }

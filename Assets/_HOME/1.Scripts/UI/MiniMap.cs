@@ -13,7 +13,7 @@ namespace HOME.UI {
         private CameraManager _cameraMgr;
         public RectTransform playerCameraPosition;
         public RectTransform playerclickPosition;
-        [SerializeField] private RawImage _mapRaw;
+        [SerializeField] private RawImage _mapRaw = default;
         public static Vector3 terrainSize;
         public static Vector3 miniMapHitTargetWorldSpace;
         private Vector3 _minimapHit;

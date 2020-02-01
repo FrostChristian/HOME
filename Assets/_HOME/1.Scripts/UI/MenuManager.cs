@@ -7,20 +7,20 @@ namespace HOME.UI {
 
     public class MenuManager : MonoBehaviour {
         [Header("Menu Prefabs")]
-        [SerializeField] private MainMenu mainMenuPrefab;
-        [SerializeField] private LoadMenu loadMenuPrefab;
-        [SerializeField] private SaveMenu saveMenuPrefab;
-        [SerializeField] private OptionsMenu optionsMenuPrefab;
-        [SerializeField] private CreditsMenu creditsScreenPrefab;
-        [SerializeField] private GameSetupMenu gameSetupMenu;
-        [SerializeField] private InGameMenu inGameMenuPrefab;
-        [SerializeField] private PauseMenu pauseMenuPrefab;
-        [SerializeField] private PlanetSelectMenu planetSelectMenu;
-        [SerializeField] private WinMenu winMenuPrefab;
-        [SerializeField] private LoseMenu loseMenuPrefab;
+        [SerializeField] private MainMenu mainMenuPrefab = default;
+        [SerializeField] private LoadMenu loadMenuPrefab = default;
+        [SerializeField] private SaveMenu saveMenuPrefab = default;
+        [SerializeField] private OptionsMenu optionsMenuPrefab = default;
+        [SerializeField] private CreditsMenu creditsScreenPrefab = default;
+        [SerializeField] private GameSetupMenu gameSetupMenu = default;
+        [SerializeField] private InGameMenu inGameMenuPrefab = default;
+        [SerializeField] private PauseMenu pauseMenuPrefab = default;
+        [SerializeField] private PlanetSelectMenu planetSelectMenu = default;
+        [SerializeField] private WinMenu winMenuPrefab = default;
+        [SerializeField] private LoseMenu loseMenuPrefab = default;
 
         [Space]
-        [SerializeField] private Transform _menuParent;
+        [SerializeField] private Transform _menuParent = default;
 
         [Header("Menu Button Sounds")]
         public AudioSource audioSource;

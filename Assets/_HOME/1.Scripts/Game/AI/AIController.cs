@@ -22,7 +22,7 @@ namespace HOME.Game {
             foreach (var ai in GetComponents<AIBehavior>()) {
                 AIs.Add(ai);
             }
-            foreach (var player in gameManager.Factions) {
+            foreach (var player in gameManager.activePlayers) {
                 if (player.playerName == playerName) {
 
                     _aIPlayers = player;

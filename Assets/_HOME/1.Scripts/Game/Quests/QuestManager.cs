@@ -8,7 +8,7 @@ namespace HOME.Game {
         private static QuestManager _instance;
         public static QuestManager Instance { get => _instance; }
 
-        [SerializeField] protected QuestSettings _questSettings;
+        [SerializeField] protected QuestSettings _questSettings = default;
         [SerializeField] private int _currentIndex = 0;
         public int CurrentIndex { get { return _currentIndex; } }
 

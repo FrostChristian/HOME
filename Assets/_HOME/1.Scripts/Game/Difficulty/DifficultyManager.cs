@@ -4,7 +4,7 @@ namespace HOME.Game {
     // handles selecting an item from a wrap around list
     public class DifficultyManager : MonoBehaviour {
 
-        [SerializeField] protected DifficultySettings _difficultySettings;
+        [SerializeField] protected DifficultySettings _difficultySettings = default;
         [SerializeField] private int _currentIndex = 0;
         public int CurrentIndex { get { return _currentIndex; } }
 

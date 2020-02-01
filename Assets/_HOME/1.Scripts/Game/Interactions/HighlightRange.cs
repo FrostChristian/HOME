@@ -5,7 +5,7 @@ namespace HOME.Game {
     [RequireComponent(typeof(Interactive))]
     public class HighlightRange : Highlight {
 
-        [SerializeField] public Projector _rangeProjector;
+        [SerializeField] public Projector _rangeProjector = default;
         [SerializeField] private bool isEnabled = true;
 
         public override void Awake() {

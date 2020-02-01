@@ -14,62 +14,62 @@ namespace HOME.UI {
         //------------------------------------------ Selection Panel--------------------------------------------//
         #region Selection
         [Header("Selection Info General")]
-        [SerializeField] private Image _selIcon;
-        [SerializeField] private Text _selName;
-        [SerializeField] [Multiline] private Text _selDescription;
-        [SerializeField] private Text _selOwner;
+        [SerializeField] private Image _selIcon = default;
+        [SerializeField] private Text _selName = default;
+        [SerializeField] [Multiline] private Text _selDescription = default;
+        [SerializeField] private Text _selOwner = default;
         [Header("Selection Health")]
-        [SerializeField] GameObject _selHealthPanel;
-        [SerializeField] private Text _selHealth;
-        [SerializeField] private Slider _selHealthBar;
+        [SerializeField] GameObject _selHealthPanel = default;
+        [SerializeField] private Text _selHealth = default;
+        [SerializeField] private Slider _selHealthBar = default;
         [Header("Selection Inventory")]
-        [SerializeField] GameObject _selInventoryPanel;
-        [SerializeField] private Text _selInventoryAmountText;
-        [SerializeField] private Text _selInventoryDescriptionText;
-        [SerializeField] private Slider _selInventoryBar;
+        [SerializeField] GameObject _selInventoryPanel = default;
+        [SerializeField] private Text _selInventoryAmountText = default;
+        [SerializeField] private Text _selInventoryDescriptionText = default;
+        [SerializeField] private Slider _selInventoryBar = default;
         [Header("Selection Buttons")]
-        [SerializeField] private Button _selDestroy;
+        [SerializeField] private Button _selDestroy = default;
         #endregion
         //------------------------------------------+Selection Panel--------------------------------------------//
         //------------------------------------------ ResourcePanel--------------------------------------------//
         [Header("Resources Panel")]
-        [SerializeField] private Text _foodField;
-        [SerializeField] private Text _ironField;
-        [SerializeField] private Text _alloyField;
-        [SerializeField] private Text _energyField;
-        [SerializeField] private Text _healthField;
-        [SerializeField] private Text _distanceToHome;
+        [SerializeField] private Text _foodField = default;
+        [SerializeField] private Text _ironField = default;
+        [SerializeField] private Text _alloyField = default;
+        [SerializeField] private Text _energyField = default;
+        [SerializeField] private Text _healthField = default;
+        [SerializeField] private Text _distanceToHome = default;
         //------------------------------------------ +ResourcePanel--------------------------------------------//
         //------------------------------------------ Summary Panel--------------------------------------------//
         [Header("Summary Panel")]
-        [SerializeField] private GameObject _summaryPanel;
-        [SerializeField] private Slider _sliderRepProg;
-        [SerializeField] private Button _buttonLeavePlanet;
-        [SerializeField] private Text _stopStartRepairText;
+        [SerializeField] private GameObject _summaryPanel = default;
+        [SerializeField] private Slider _sliderRepProg = default;
+        [SerializeField] private Button _buttonLeavePlanet = default;
+        [SerializeField] private Text _stopStartRepairText = default;
         [SerializeField] private float _flyAwayCondition = 1f; // value between 0-1, eg 0.5f == 0.5 repair slider value
-        [SerializeField] private Text _textRepProg;
+        [SerializeField] private Text _textRepProg = default;
         private bool _isSumActive = false;
         //planet info
-        [SerializeField] private Text _planetNumber;
-        [SerializeField] private Text _distToHome;
+        [SerializeField] private Text _planetNumber = default;
+        [SerializeField] private Text _distToHome = default;
         //------------------------------------------ +Summary Panel--------------------------------------------//
         //------------------------------------------ Quests--------------------------------------------//structs
         [Header("Quest Panel")]
-        [SerializeField] private GameObject _questPanel;
-        [SerializeField] private QuestManager _questManager;
-        [SerializeField] private Image _questIcon;
-        [SerializeField] private Text _questNameText;
-        [SerializeField] private Text _questNameBigText;
-        [SerializeField] private Text _questDescriptionBigText;
-        [SerializeField] private Text _questDescriptionText;
-        [SerializeField] private Text _questProgressText;
-        [SerializeField] private bool _isQuestActive = false; // just for quest panel toggle
+        [SerializeField] private GameObject _questPanel = default;
+        [SerializeField] private QuestManager _questManager = default;
+        [SerializeField] private Image _questIcon = default;
+        [SerializeField] private Text _questNameText = default;
+        [SerializeField] private Text _questNameBigText = default;
+        [SerializeField] private Text _questDescriptionBigText = default;
+        [SerializeField] private Text _questDescriptionText = default;
+        [SerializeField] private Text _questProgressText = default;
+        [SerializeField] private bool _isQuestPanelActive = false; // just for quest panel toggle
         public static bool _initQuests = false;
         //------------------------------------------ +Quests--------------------------------------------//
 
         //------------------------------------------ Actions/Buttons--------------------------------------------//
         [Header("Actions / Buttons")]
-        [SerializeField] private Button[] _buttons;
+        [SerializeField] private Button[] _buttons = default;
         private List<Action> actionCalls = new List<Action>();
 
         //------------------------------------------ +Actions/Buttons--------------------------------------------//
@@ -163,14 +163,17 @@ namespace HOME.UI {
             }
         }
 
-        public void SelectionFill(string unitName, bool unitHasHealth, string unitHealth, string unitDescription, Sprite unitIcon, string unitOwner, float unitHealthBar, bool unitHasResources, string unitInventoryDesc, float unitInventoryBar, string unitInventory) {
+        public void SelectionFill(string unitName, bool unitHasHealth, string unitHealth, string unitDescription, Sprite unitIcon, bool isAi, float unitHealthBar, bool unitHasResources, string unitInventoryDesc, float unitInventoryBar, string unitInventory) {
 
             _selName.text = unitName;
             _selDescription.text = unitDescription;
             _selIcon.sprite = unitIcon;
             _selIcon.color = Color.white;
-            _selOwner.text = unitOwner;
+            _selOwner.text = isAi.ToString() ;
+
+            if (!isAi) {
             _selDestroy.gameObject.SetActive(true);
+            }
 
             if (unitHealth != "" && unitHasHealth) { // if unit has health
                 _selHealthPanel.gameObject.SetActive(true);
@@ -178,7 +181,7 @@ namespace HOME.UI {
                 _selHealth.text = unitHealth;
             }
 
-            if (unitInventory != "" && unitHasResources) {// if unit has resources
+            if (unitInventory != "" && unitHasResources && !isAi) {// if unit has resources
                 _selInventoryPanel.gameObject.SetActive(true);
                 _selInventoryDescriptionText.text = unitInventoryDesc;
                 _selInventoryBar.value = unitInventoryBar;
@@ -187,7 +190,7 @@ namespace HOME.UI {
         }
 
         public void SelectionClear() {
-            SelectionFill("", false, "", "", null, "", 0f, false, "", 0f, "");
+            SelectionFill("", false, "", "", null, false, 0f, false, "", 0f, "");
             _selIcon.color = Color.clear;
             _selHealthPanel.gameObject.SetActive(false);
             _selInventoryPanel.gameObject.SetActive(false);
@@ -226,14 +229,14 @@ namespace HOME.UI {
         //--------------------------------------------------------------------------------------------//
         //------------------------------------------ Quests--------------------------------------------//
         public void OnQuestPressed() { //on button
-            if (_isQuestActive == true) { // if active on click close it
+            if (_isQuestPanelActive == true) { // if active on click close it
                 _questPanel.SetActive(false);
-                _isQuestActive = false;
-                Debug.Log("false" + _isQuestActive);
+                _isQuestPanelActive = false;
+                Debug.Log("false" + _isQuestPanelActive);
             } else {
                 _questPanel.SetActive(true);
-                _isQuestActive = true;
-                Debug.Log("true" + _isQuestActive);
+                _isQuestPanelActive = true;
+                Debug.Log("true" + _isQuestPanelActive);
             }
         }
 
@@ -250,9 +253,8 @@ namespace HOME.UI {
         public void OnOkayQuestPressed() {
             QuestSetupDefinition currentQuest = _questManager?.GetCurrentQuest();
             if (currentQuest.Id == 7) {
-                _isQuestActive = false;
-                return;
-                
+                _isQuestPanelActive = false;
+                return;                
             }
             if (currentQuest.Id == 3) {
                 SelectQuest(7);
@@ -265,7 +267,7 @@ namespace HOME.UI {
                 SelectQuest(0);
                 QuestInfo();
             } else {
-                _isQuestActive = true;
+                _isQuestPanelActive = true;
                 OnQuestPressed(); // exit
             }
         }
@@ -287,7 +289,7 @@ namespace HOME.UI {
 
             QuestSetupDefinition currentQuest = _questManager?.GetCurrentQuest();
             if (currentQuest.Id == 0) {// build one microgreenery
-                foreach (var player in GameManager.Instance.Factions) { // look for the players units
+                foreach (var player in GameManager.Instance.activePlayers) { // look for the players units
                     if (!player.isAi) {
                         foreach (var entity in player.ActiveUnits) {
                             if (entity.gameObject.tag == "FoodEntity") {
@@ -299,7 +301,7 @@ namespace HOME.UI {
                 }
             }
             if (currentQuest.Id == 1) {// build one solar farm
-                foreach (var player in GameManager.Instance.Factions) { // look for the players units
+                foreach (var player in GameManager.Instance.activePlayers) { // look for the players units
                     if (!player.isAi) {
                         foreach (var entity in player.ActiveUnits) {
                             if (entity.gameObject.tag == "EnergyEntity") {
@@ -311,7 +313,7 @@ namespace HOME.UI {
                 }
             }
             if (currentQuest.Id == 2) {// build 3 turrets
-                foreach (var player in GameManager.Instance.Factions) { // look for the players units
+                foreach (var player in GameManager.Instance.activePlayers) { // look for the players units
                     if (!player.isAi) {
                         foreach (var entity in player.ActiveUnits) {
                             Debug.Log("" + entity.name);
@@ -345,6 +347,11 @@ namespace HOME.UI {
         }
 
         public void QuestInfo() {
+            if (!GameManager.Instance.questEnabled) {
+                _questPanel.SetActive(false);
+                _isQuestPanelActive = false;
+                return;
+            }
 
             QuestSetupDefinition currentQuest = _questManager?.GetCurrentQuest();
             if (currentQuest == null) {

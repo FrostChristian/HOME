@@ -19,7 +19,7 @@ namespace HOME.Game {
       [SerializeField] private List<GameObject> _randomPlanet = new List<GameObject>(); // holds all planet prefabs
 
         // Holding Planet Info in these:
-        [SerializeField] private PlanetSelectMenu _planetSelectMenu;
+        [SerializeField] private PlanetSelectMenu _planetSelectMenu = default;
         private int _planetID;
         private string _planetInfo;
         private float _planetDistanceToShip;

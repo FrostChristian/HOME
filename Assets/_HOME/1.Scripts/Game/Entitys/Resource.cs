@@ -10,7 +10,7 @@ namespace HOME.Game {
 
         public static event EventHandler OnResourceEntityClicked;
 
-        [SerializeField] public DataManager.ResourceType resourceType; // assign in inspector
+        [SerializeField] public DataManager.ResourceType resourceType = default; // assign in inspector
 
         [SerializeField] private float resourceGenerationAmount = 0f;
         public Transform resourceEntityCollectPointTransform;
@@ -91,7 +91,7 @@ namespace HOME.Game {
                 CurrHealth + "/" + MaxHealth,
                 GetDescription,
                 GetIcon,
-                "Owner: " + player.isAi,
+                player.isAi,
                 healthBar,
                 hasResources,
                 "Available Resources: " + resourceType,

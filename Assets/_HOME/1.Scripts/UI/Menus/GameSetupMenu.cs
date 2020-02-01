@@ -7,14 +7,14 @@ using UnityEngine.UI;
 namespace HOME.UI {
     public class GameSetupMenu : Menu<GameSetupMenu> {
 
-        [SerializeField] private DifficultyManager _difficultyManager;
-        [SerializeField] private Image _previewImage;
-        [SerializeField] private Text _nameText;
-        [SerializeField] private Text _descriptionText;
-        [SerializeField] private Text _infoText;
-        [SerializeField] private GameObject _lockIcon;
+        [SerializeField] private DifficultyManager _difficultyManager = default;
+        [SerializeField] private Image _previewImage = default;
+        [SerializeField] private Text _nameText = default;
+        [SerializeField] private Text _descriptionText = default;
+        [SerializeField] private Text _infoText = default;
+        [SerializeField] private GameObject _lockIcon = default;
         [SerializeField] private float _playDelay = 0.5f; // delay before we play the game
-        [SerializeField] private TransitionFader _startTransitionPrefab; // reference to transition prefab
+        [SerializeField] private TransitionFader _startTransitionPrefab = default; // reference to transition prefab
 
         private string _defaultInfo;
 
@@ -57,11 +57,23 @@ namespace HOME.UI {
         }
 
         public void OnPreviousPressed() {
-
             _difficultyManager.DecrementIndex();
             UpdateUI();
         }
 
+        public void OnPlayerNameValueChanged(string name) {
+            if (DataManager.Instance != null) {
+                DataManager.Instance.PlayerName = name;
+                Debug.Log(DataManager.Instance.PlayerName);
+            }
+        }
+        /*
+        public void OnPlayerNameEndEdit() {
+            if (DataManager.Instance != null) {
+                DataManager.Instance.Save();
+            }
+        }
+        */
         public void OnPlayPressed() {
             if (_difficultyManager == null) {
                 Debug.LogError("GameSetupMenu OnPlayPressed: missing difficulty selector");
@@ -76,7 +88,7 @@ namespace HOME.UI {
         }
 
         IEnumerator StartGameRoutine(int sceneIndex) {
-        //IEnumerator StartGameRoutine(string sceneName) {
+            //IEnumerator StartGameRoutine(string sceneName) {
             TransitionFader.PlayTransition(_startTransitionPrefab);
             yield return new WaitForSeconds(_playDelay);
             LevelLoader.LoadLevel(sceneIndex);

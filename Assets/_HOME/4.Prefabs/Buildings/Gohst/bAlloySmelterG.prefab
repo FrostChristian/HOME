@@ -15728,15 +15728,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2683630034805018940}
-  - component: {fileID: 3358891261092910344}
   - component: {fileID: 1181408836914586106}
-  - component: {fileID: 5503936224030919881}
-  - component: {fileID: 2336306237113971934}
-  - component: {fileID: 4141793425560594931}
-  - component: {fileID: 3841237559435294827}
-  - component: {fileID: 870848490}
   m_Layer: 10
-  m_Name: bAlloySmelter
+  m_Name: bAlloySmelterG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15762,22 +15756,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &3358891261092910344
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 3.055, y: 0.755, z: 3.545}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.74, z: 0.17}
-  m_TimeToStationary: 0.5
 --- !u!65 &1181408836914586106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15791,122 +15769,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.2608275, y: 2.5869026, z: 7.0898237}
   m_Center: {x: -0.122671366, y: 1.0556002, z: 0.14620495}
---- !u!114 &5503936224030919881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e06c1ef58a98a194ba6fa86552b8a9ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SelectDeselect: 0
---- !u!114 &2336306237113971934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36c0f623d75e1b5449abe202f86dfef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisplayItem: {fileID: 7736479024224641823}
---- !u!114 &4141793425560594931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7d8f736a752ca4ca33fe434be2cb9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Info:
-    playerName: 
-    playerID: 0
-    playerLocation: {fileID: 0}
-    playerColor: {r: 0, g: 0, b: 0, a: 0}
-    isAi: 0
-    playerCredits: 0
-    StartingEntitys: []
-    _activeUnits: []
---- !u!114 &3841237559435294827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d36207bbd27a9754aa929b4956092256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: Alloy Smelter
-  _description: Smelts Bauxite Ores in to useful Metals.
-  _icon: {fileID: 21300000, guid: c2b5df7a2922c8148bbbbe53a95ddfc8, type: 3}
-  hasHealth: 1
-  maxHealth: 150
-  _currHealth: 0
-  deathHealth: 0
-  explosionPrefab: {fileID: 1736460536341695932, guid: 0d3f81d0a745e244f99c4a30ae43a0b4,
-    type: 3}
-  hasResources: 0
-  _currInventoryAmount: 1
-  _maxInventoryAmount: 5000
-  isStorage: 1
-  resourceStorageType: 5
-  _ironCost: 200
-  _alloyCost: 0
-  _foodCost: 10
-  _energyCost: 0
-  _inGameMenu: {fileID: 0}
-  player:
-    playerName: 
-    playerID: 0
-    playerLocation: {fileID: 0}
-    playerColor: {r: 0, g: 0, b: 0, a: 0}
-    isAi: 0
-    playerCredits: 0
-    StartingEntitys: []
-    _activeUnits: []
-  showUI: 0
-  _selected: 0
-  spawnPoint: {fileID: 8989079851295920850}
-  _questManager: {fileID: 0}
-  resourceType: 2
-  resourceGenerationAmount: 0
-  resourceEntityCollectPointTransform: {fileID: 3275381441031403327}
-  crates:
-  - {fileID: 8564052444671158715}
-  - {fileID: 8347581576411156198}
-  - {fileID: 8800765448351442127}
-  - {fileID: 7417389214849385372}
-  - {fileID: 1798457208521037224}
-  - {fileID: 6797529247573982435}
---- !u!114 &870848490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683630034804716684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd91bce816ed45f478b55141617b461b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabEntity: {fileID: 0}
-  icon: {fileID: 21300000, guid: 714aa38ff6c42994e9d7b40704c79025, type: 3}
-  Prefab: {fileID: 5739329647472469117, guid: c053e109cf2f0d24ea15df7e2fc09365, type: 3}
 --- !u!1 &2683630034804717204
 GameObject:
   m_ObjectHideFlags: 0
@@ -18374,12 +18236,6 @@ PrefabInstance:
       objectReference: {fileID: 4300002, guid: 24eccaac795f1e0499ab48fb59e36a52, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39eb7fdfc7cc4b4ba472bd562193eb3, type: 3}
---- !u!1 &1798457208521037224 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1798457208520937422}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1798457208521267470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464576, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
@@ -19020,12 +18876,6 @@ PrefabInstance:
       objectReference: {fileID: 4300002, guid: 24eccaac795f1e0499ab48fb59e36a52, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39eb7fdfc7cc4b4ba472bd562193eb3, type: 3}
---- !u!1 &6797529247573982435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6797529247574075013}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6797529247574143045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464576, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
@@ -19109,12 +18959,6 @@ PrefabInstance:
       objectReference: {fileID: 4300002, guid: 24eccaac795f1e0499ab48fb59e36a52, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39eb7fdfc7cc4b4ba472bd562193eb3, type: 3}
---- !u!1 &7417389214849385372 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 7417389214849554938}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7417389214849617722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464576, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
@@ -19198,12 +19042,6 @@ PrefabInstance:
       objectReference: {fileID: 4300002, guid: 24eccaac795f1e0499ab48fb59e36a52, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39eb7fdfc7cc4b4ba472bd562193eb3, type: 3}
---- !u!1 &8347581576411156198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8347581576411321472}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8347581576410858048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464576, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
@@ -19293,12 +19131,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8564052444671259613}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8564052444671158715 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8564052444671259613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8800765448351547049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19379,12 +19211,6 @@ PrefabInstance:
 --- !u!4 &8800765448351213673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464576, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8800765448351547049}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8800765448351442127 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 170598, guid: d39eb7fdfc7cc4b4ba472bd562193eb3,
     type: 3}
   m_PrefabInstance: {fileID: 8800765448351547049}
   m_PrefabAsset: {fileID: 0}

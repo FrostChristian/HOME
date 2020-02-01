@@ -4,9 +4,9 @@ namespace HOME.Game {
     // on right click on map
     public class ClickIndicator : MonoBehaviour {
 
-        [SerializeField] private GameObject _ring1;
-        [SerializeField] private GameObject _ring2;
-        [SerializeField] private GameObject _ring3;
+        [SerializeField] private GameObject _ring1 = default;
+        [SerializeField] private GameObject _ring2 = default;
+        [SerializeField] private GameObject _ring3 = default;
         private float timer = 1f;
 
         public static ClickIndicator _instance;

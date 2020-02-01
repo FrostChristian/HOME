@@ -32,7 +32,7 @@ namespace HOME.Game {
         [SerializeField] private float maxHealth = 100f;
         public float MaxHealth { get { return maxHealth; } set { if (value > 0.0) maxHealth = value; } }    //the maximum health must always be > 0.0
 
-        [SerializeField] private float _currHealth;
+        [SerializeField] private float _currHealth = default;
         public float CurrHealth { get { return _currHealth; } set { _currHealth = value; } }    //the maximum health must always be > 0.0
 
         [SerializeField] private float deathHealth = 0f;
@@ -45,7 +45,7 @@ namespace HOME.Game {
 
         [Space]
         public bool isStorage = false;
-        [SerializeField] public DataManager.ResourceType resourceStorageType; // assign in inspector
+        [SerializeField] public DataManager.ResourceType resourceStorageType = default; // assign in inspector
 
         [Header("Cost")]
         [SerializeField] private float _ironCost = 0f;
@@ -68,7 +68,7 @@ namespace HOME.Game {
         public Action ClickFunc = null;
         private ShowActionButton _buttons;
         private Interactive _interactive;
-        [SerializeField] private QuestManager _questManager;
+        [SerializeField] private QuestManager _questManager = default;
 
         void OnMouseOver() {
             if (Input.GetMouseButtonUp(1)) { // only on rightclick

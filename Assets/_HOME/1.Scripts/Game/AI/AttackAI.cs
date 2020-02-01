@@ -21,7 +21,7 @@ namespace HOME.Game {
             int wave = (int)(ai.AIUnits.Count * attackSquadSize); // current wave size
             dronesRequired += increasedPerWave; // increse drones required
 
-            foreach (var p in gameManager.Factions) { //loop through players to find the human player
+            foreach (var p in gameManager.activePlayers) { //loop through players to find the human player
                 if (p.isAi) { // filter out AI
                     continue;
                 }

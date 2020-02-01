@@ -14,13 +14,13 @@ namespace HOME.Data {
         private JSONSaver _jsonSaver;
 
         //------------------------------------------Options--------------------------------------------//
-        public float MasterVolume { get { return _saveData.masterVolume; } set {  _saveData.masterVolume = value; } }
-        public float SFXVolume { get { return _saveData.sfxVolume; } set {  _saveData.sfxVolume = value; } }
-        public float MusicVolume { get { return _saveData.musicVolume; } set {  _saveData.musicVolume = value; } }
+        public float MasterVolume { get { return _saveData.masterVolume; } set { _saveData.masterVolume = value; } }
+        public float SFXVolume { get { return _saveData.sfxVolume; } set { _saveData.sfxVolume = value; } }
+        public float MusicVolume { get { return _saveData.musicVolume; } set { _saveData.musicVolume = value; } }
 
         //-----------------------------------------+Options--------------------------------------------//
         //------------------------------------------+PLayer--------------------------------------------//
-        public string PlayerName { get { return _saveData.pName; } set { Debug.Log("Set Player Name to: " + (_saveData.pName = value)); _saveData.pName = value; } }
+        public string PlayerName { get { return _saveData.pName; } set {  _saveData.pName = value; Debug.Log("Set Player Name to: " + _saveData.pName); } }
         public float PlayerShipHealth { get { return _saveData.pShipHealth; } set { _saveData.pShipHealth = value; } }
         public float PlayerShipMaxHealth { get { return _saveData.pShipMaxHealth; } set { _saveData.pShipMaxHealth = value; } }
         //Resources
@@ -50,10 +50,10 @@ namespace HOME.Data {
         public List<PlanetSetupDefinition> PlanetsVisited { get { return _planetsVisited; } set { _planetsVisited = value; } }
         //------------------------------------------ +Planets--------------------------------------------//
         //------------------------------------------ Resource Gatherer--------------------------------------------//
-        public  event EventHandler OnResourceAmountChanged;
+        public event EventHandler OnResourceAmountChanged;
 
-        public Dictionary<ResourceType, float> resourceAmountDictionary;
- 
+        static public Dictionary<ResourceType, float> resourceAmountDictionary;
+
         public enum ResourceType {
             Empty,
             Iron,
@@ -63,11 +63,12 @@ namespace HOME.Data {
             BauxiteOre,
             IronOre,
         }
-        public void Init() {
+        public static void InitResources(float resourceAmount) {
+
             resourceAmountDictionary = new Dictionary<ResourceType, float>();
 
-            foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType))) { 
-                resourceAmountDictionary[resourceType] = 0;// init all keys with 0
+            foreach (ResourceType resourceType in System.Enum.GetValues(typeof(ResourceType))) {
+                resourceAmountDictionary[resourceType] = resourceAmount;// init all keys with 0
             }
         }
 
@@ -127,25 +128,25 @@ namespace HOME.Data {
 
         #region Debug
         [Header("Options INFO")]
-        [SerializeField] private float _MasterVolume;
-        [SerializeField] private float _SFXVolume;
-        [SerializeField] private float _MusicVolume;
+        [SerializeField] private float _MasterVolume = default;
+        [SerializeField] private float _SFXVolume = default;
+        [SerializeField] private float _MusicVolume = default;
 
         [Header("Player INFO")]
-        [SerializeField] private string _PlayerName;
-        [SerializeField] private float _PlayerShipHealth;
-        [SerializeField] private float _PlayerShipMaxHealth;
+        [SerializeField] private string _PlayerName = default;
+        [SerializeField] private float _PlayerShipHealth = default;
+        [SerializeField] private float _PlayerShipMaxHealth = default;
         //Resources
-        [SerializeField] private float _PlayerCredits;
-        [SerializeField] private float _PlayerIronOre;
+        [SerializeField] private float _PlayerCredits = default;
+        [SerializeField] private float _PlayerIronOre = default;
 
         [Header("AI INFO")]
-        [SerializeField] private string _AIName;
-        [SerializeField] private float _AICredits;
-        [SerializeField] private float _AIHealth;
+        [SerializeField] private string _AIName = default;
+        [SerializeField] private float _AICredits = default;
+        [SerializeField] private float _AIHealth = default;
 
         [Header("Game INFO")]
-        [SerializeField] private float _HomeDistance;
+        [SerializeField] private float _HomeDistance = default;
         #endregion
 
         private void Awake() {
@@ -156,7 +157,7 @@ namespace HOME.Data {
             }
             _saveData = new SaveData(); //every game start create new Object to SaveData 
             _jsonSaver = new JSONSaver();
-            Init(); //Init dic
+            InitResources(0f); //Init dic
         }
 
         private void Update() {

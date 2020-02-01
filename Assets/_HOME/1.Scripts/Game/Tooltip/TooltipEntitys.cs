@@ -28,16 +28,16 @@ namespace HOME.Game {
 
         private Camera uiCamera;
         [SerializeField]
-        private RectTransform canvasRectTransform;
+        private RectTransform canvasRectTransform = default;
 
-        [SerializeField] private Image _entityIcon;
-        [SerializeField] private Text _entityName;
-        [SerializeField] private Text _entityDescription;
-        [SerializeField] private Text _entityIronCost;
-        [SerializeField] private Text _entityFoodCost;
-        [SerializeField] private Text _entityAlloyCost;
-        [SerializeField] private Text _entityEnergyCost;
-        [SerializeField] private RectTransform backgroundRectTransform;
+        [SerializeField] private Image _entityIcon = default;
+        [SerializeField] private Text _entityName = default;
+        [SerializeField] private Text _entityDescription = default;
+        [SerializeField] private Text _entityIronCost = default;
+        [SerializeField] private Text _entityFoodCost = default;
+        [SerializeField] private Text _entityAlloyCost = default;
+        [SerializeField] private Text _entityEnergyCost = default;
+        [SerializeField] private RectTransform backgroundRectTransform = default;
 
         private void Awake() {
             instance = this;
@@ -99,7 +99,7 @@ namespace HOME.Game {
         }
 
         private void HideTooltip() {
-            Debug.Log("HideTooltip");
+            //Debug.Log("HideTooltip");
             gameObject.SetActive(false);
         }
 

@@ -8,7 +8,7 @@ namespace HOME.Game {
 
     public class QuestSettings : ScriptableObject {
 
-        [SerializeField] private List<QuestSetupDefinition> _quest;
+        [SerializeField] private List<QuestSetupDefinition> _quest = default;
 
         public int TotalQuests { get { return _quest.Count; } }
 

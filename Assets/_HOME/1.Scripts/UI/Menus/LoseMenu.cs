@@ -9,9 +9,9 @@ namespace HOME.UI {
     public class LoseMenu : Menu<LoseMenu> {
 
         [Header("Transiton")]
-        [SerializeField] private TransitionFader _startTransitionPrefab;
-        [SerializeField] private Text _restartConfirmText;
-        [SerializeField] private GameObject _restartConfirm;
+        [SerializeField] private TransitionFader _startTransitionPrefab = default;
+        [SerializeField] private Text _restartConfirmText = default;
+        [SerializeField] private GameObject _restartConfirm = default;
 
         public override void OnBackPressed() {
             base.OnBackPressed();

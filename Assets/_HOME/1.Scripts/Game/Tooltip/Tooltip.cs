@@ -25,11 +25,11 @@ namespace HOME {
 
         private Camera uiCamera;
         [SerializeField]
-        private RectTransform canvasRectTransform;
+        private RectTransform canvasRectTransform = default;
 
-        [SerializeField] private Text tooltipText;
-        [SerializeField] private RectTransform backgroundRectTransform;
-        [SerializeField] private Func<string> getTooltipStringFunc;
+        [SerializeField] private Text tooltipText = default;
+        [SerializeField] private RectTransform backgroundRectTransform = default;
+        [SerializeField] private Func<string> getTooltipStringFunc = default;
 
         private void Awake() {
             instance = this;

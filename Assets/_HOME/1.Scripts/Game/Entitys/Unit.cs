@@ -18,8 +18,8 @@ namespace HOME.Game {
         public static Vector3 _minimapTarget = Vector3.zero;
 
         [Space]
-        [SerializeField] private State state;
-        [SerializeField] private Vector3 _target;
+        [SerializeField] private State state = default;
+        [SerializeField] private Vector3 _target = default;
 
         private GameManager _gameManager;
         private PlayerSetupDefinition _player;
@@ -234,7 +234,7 @@ namespace HOME.Game {
                 CurrHealth + "/" + MaxHealth,
                 GetDescription,
                 GetIcon,
-                "Owner: " + player.isAi,
+                player.isAi,
                 healthBar,
                 hasResources,
                 GetInventoryDescription(),

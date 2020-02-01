@@ -200,7 +200,7 @@ namespace HOME.Game {
         private void Start() {
             layer_mask = LayerMask.GetMask("Ship"); //ship fader
             MiniMap.Instance.Init(this);
-            foreach (var p in gameMgr.Factions) { //set cam to player position
+            foreach (var p in gameMgr.activePlayers) { //set cam to player position
                 if (p.isAi) {
                     continue;
                 }

@@ -17,13 +17,13 @@ namespace HOME.Game {
         [Header("GatherAI")]
         [SerializeField] private float intakeCapacity = 1f;
         [Space]
-        [SerializeField] private State _state;
-        [SerializeField] private Transform _storageTransform;
-        [SerializeField] private TextMesh _inventoryTextMesh;
+        [SerializeField] private State _state = default;
+        [SerializeField] private Transform _storageTransform = default;
+        [SerializeField] private TextMesh _inventoryTextMesh = default;
 
         public Resource _resourceEntity;
         public DataManager.ResourceType _iCarry;
-        [SerializeField] private Dictionary<DataManager.ResourceType, float> _inventoryAmountDicctonary;
+        [SerializeField] private Dictionary<DataManager.ResourceType, float> _inventoryAmountDicctonary = default;
         private Unit _thisUnit;
         private Action onArrivedAtPosition;
 

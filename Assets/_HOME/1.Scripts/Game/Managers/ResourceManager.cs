@@ -9,9 +9,9 @@ namespace HOME.Game {
 
         public static ResourceManager Instance;
 
-        [SerializeField] public List<GatherAI> selectedGathererAIList;
+        [SerializeField] public List<GatherAI> selectedGathererAIList = default;
         [SerializeField] public List<Transform> ironStorageTransform = new List<Transform>();
-        [SerializeField] private Transform storageTransform;
+        [SerializeField] private Transform storageTransform = default;
 
 
         public List<Resource> resourceEntityList;

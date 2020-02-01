@@ -6,7 +6,7 @@ namespace HOME.Game {
     public class LoadingBar : MonoBehaviour {
         // simple script to update loading progress
 
-        [SerializeField] private Slider _slider;    
+        [SerializeField] private Slider _slider = default;    
         private float _targetProgressValue;    
         public float sliderValue;    
         private const float paddingValue = 0.15f;    // asynchronous load ends at 0.1f, pad the value so the bar fills out correctly

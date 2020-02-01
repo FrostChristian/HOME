@@ -9,9 +9,9 @@ namespace HOME.UI {
     public class OptionsMenu : Menu<OptionsMenu> {
 
         [Header("Sliders")]
-        [SerializeField] private Slider _masterVolumeSlider;
-        [SerializeField] private Slider _sfxVolumeSlider;
-        [SerializeField] private Slider _musicVolumeSlider;
+        [SerializeField] private Slider _masterVolumeSlider = default;
+        [SerializeField] private Slider _sfxVolumeSlider = default;
+        [SerializeField] private Slider _musicVolumeSlider = default;
 
         protected override void Start() {
             base.Start();

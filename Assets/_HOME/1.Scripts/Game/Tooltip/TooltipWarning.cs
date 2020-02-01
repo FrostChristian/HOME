@@ -24,11 +24,11 @@ namespace HOME.Game {
 
         private Camera uiCamera;
         [SerializeField]
-        private RectTransform canvasRectTransform;
+        private RectTransform canvasRectTransform = default;
 
-        [SerializeField] private Text tooltipText;
-        [SerializeField] private Image backgroundImage;
-        [SerializeField] private RectTransform backgroundRectTransform;
+        [SerializeField] private Text tooltipText = default;
+        [SerializeField] private Image backgroundImage = default;
+        [SerializeField] private RectTransform backgroundRectTransform = default;
         private Func<string> getTooltipStringFunc;
         private float showTimer;
         private float flashTimer;

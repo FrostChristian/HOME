@@ -8,8 +8,8 @@ namespace HOME.UI {
 
     public class WinMenu : Menu<WinMenu> {
 
-        [SerializeField] private float _playDelay;
-        [SerializeField] private TransitionFader _startTransitionPrefab;
+        [SerializeField] private float _playDelay = default;
+        [SerializeField] private TransitionFader _startTransitionPrefab = default;
 
         public void OnNextLevelPressed() {
             StartCoroutine(StartGameRoutine(3)); // load up the appropriate level after transition

@@ -13,50 +13,60 @@ namespace HOME.Game {
         private static GameManager _instance;
         public static GameManager Instance { get => _instance; }
         //-------------------------------------------TEMP--------------------------------------------//   
-        [SerializeField] private bool _debugWin;
+        [Header("Debug")]
+        [SerializeField] private bool _debugWin = default;
         public bool DebugWin { get { return _debugWin; } set { _debugWin = value; } }
+        public bool DebugResources = false;
         //-------------------------------------------+TEMP--------------------------------------------//
-
         private bool _isGameOver;
         public bool IsGameOver { get { return _isGameOver; } set { _isGameOver = value; } }
         private bool GAMEOVER = false;
-        public bool iWon = false;
-
-        [SerializeField] private TransitionFader _winTransitionPrefaN;
-        [SerializeField] private TransitionFader _loseTransitionPrefaN;
+        [HideInInspector] public bool iWon = false;
         //-------------------------------------------PLayerSetupDefinitions--------------------------------------------//
         [Header("Players")]
-        [SerializeField] private Transform _playerParent;
-        [SerializeField] private GameObject _defaultUnitPrefab;
-        [SerializeField] private GameObject _defaultBasePrefab;
-        [SerializeField] private GameObject _defaultAIBasePrefab;
-        [SerializeField] private List<Transform> _humanSpawn = new List<Transform>();
-        [SerializeField] private List<Transform> _aISpawn = new List<Transform>();
-        public List<PlayerSetupDefinition> Factions = new List<PlayerSetupDefinition>();
+        public List<PlayerSetupDefinition> activePlayers = new List<PlayerSetupDefinition>();
+        [Space]
+        [SerializeField] private List<Transform> _humanSpawnLocations = new List<Transform>();
+        [SerializeField] private List<Transform> _aISpawnLocations = new List<Transform>();
+        [Space]
+        [SerializeField] private GameObject _defaultUnitPrefab = default;
+        [SerializeField] private GameObject _defaultBasePrefab = default;
+        [SerializeField] private GameObject _defaultAIBasePrefab = default;
+        private Transform _playerParent = default;
         //------------------------------------------+PLayerSetupDefinitions--------------------------------------------//
         //------------------------------------------ Navigation--------------------------------------------//
-        [SerializeField] public Camera _miniMapCamera;
-        [SerializeField] public static TerrainCollider _mapCollider;
+        [Header("Navigation")]
+        [SerializeField] public static TerrainCollider _mapCollider = default;
         //------------------------------------------+Navigation--------------------------------------------//
         //------------------------------------------ Repair--------------------------------------------//
+        [Header("Repair")]
         public static bool _isRepairActive = false;
         //------------------------------------------ +Repair--------------------------------------------//
         //------------------------------------------ AI--------------------------------------------//
+        [Header("AI")]
         [SerializeField] private bool _aIEnabled = true;
         [SerializeField] bool _spawnEnemys = true;
-        [SerializeField] private GameObject[] _aIEntitys;
-        [SerializeField] private NavMeshObstacle[] navMeshObstacles;
+        [SerializeField] private GameObject[] _aIEntitys = default;
+        [SerializeField] private NavMeshObstacle[] navMeshObstacles = default;
 
         //------------------------------------------- +AI--------------------------------------------//
         //------------------------------------------ Highlights Range Indicator--------------------------------------------//
         public static List<Projector> playerRangeProjectors = new List<Projector>();
-        [SerializeField] private bool _rangeProjectorsEnabled;
+        [Space]
+        [SerializeField] private bool _rangeProjectorsEnabled = default;
         //------------------------------------------ +Highlights Range Indicator--------------------------------------------//
-        //------------------------------------------ Loading --------------------------------------------//
+        //------------------------------------------ Difficulty --------------------------------------------//
+        [Header("Difficulty")]
         private GameDifficultyDefinition _currentDifficulty;
-        private GameDifficultyDefinition _currentQuest;
+        //------------------------------------------ + Difficulty--------------------------------------------//
+        //------------------------------------------ Quests --------------------------------------------//
+        [Header("Quests")]
+        [SerializeField] public bool questEnabled = true;
+        //------------------------------------------ + Quests--------------------------------------------//
+        [Header("Transitions")]
+        [SerializeField] private TransitionFader _winTransitionPrefaN = default;
+        [SerializeField] private TransitionFader _loseTransitionPrefaN = default;
 
-        //------------------------------------------ + Loading--------------------------------------------//
 
 
         //scripts
@@ -80,7 +90,7 @@ namespace HOME.Game {
             CamMgr = FindObjectOfType(typeof(CameraManager)) as CameraManager;
             DifficultyMgr = FindObjectOfType(typeof(DifficultyManager)) as DifficultyManager;
             QuestMgr = FindObjectOfType(typeof(QuestManager)) as QuestManager;
-           
+
 
             // init managers
             ResourceMgr.Init(this);
@@ -94,24 +104,23 @@ namespace HOME.Game {
 
             if (SceneManager.GetActiveScene().name == "Map1") {
                 InGameMenu.Open();
-                Debug.Log("GameManager Awake(): Entered Game through Map1");
+                //Debug.Log("GameManager Awake(): Entered Game through Map1");
             }
 
-            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.IronOre, 500);
-            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.BauxiteOre, 500);
-            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Food, 100);
-            //DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Food, 5000);
-            //DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Alloy, 5000);
             PrepareLevel();
             _rangeProjectorsEnabled = true;
-            InGameMenu._initQuests =true;
+            InGameMenu._initQuests = true;
         }
 
         private void Update() {
             CheckEndGame();
             RangeIndicatorDisplay();
             RepairShip();
+
+            Debugger();
         }
+
+
 
         #region PrepareLevel
 
@@ -121,6 +130,7 @@ namespace HOME.Game {
             FindSpawnPoints();
             CreatePlayers();
             PopulatePlayers();
+            AddPlayerResources();
         }
 
         private void FindMap() {
@@ -138,16 +148,16 @@ namespace HOME.Game {
             var aSpawn = GameObject.FindGameObjectsWithTag("AISpawn");
             for (int i = 0; i < hSpawn.Length; i++) {
                 var hs = hSpawn[i].transform;
-                _humanSpawn.Add(hs);
+                _humanSpawnLocations.Add(hs);
             }
             for (int i = 0; i < aSpawn.Length; i++) {
                 var ai = aSpawn[i].transform;
-                _aISpawn.Add(ai);
+                _aISpawnLocations.Add(ai);
             }
         }
 
         private void CreatePlayers() {
-            foreach (var hS in _humanSpawn) {//create human player
+            foreach (var hS in _humanSpawnLocations) {//create human player
                 var newPlayer = new PlayerSetupDefinition();
                 newPlayer.playerID = 0; //set ID
                 newPlayer.playerName = DataManager.Instance.PlayerName; //set loaction to transform
@@ -156,10 +166,10 @@ namespace HOME.Game {
                 newPlayer.playerCredits = 300f; // DEL
                 //newPlayer.StartingEntitys.Add(_defaultUnitPrefab);
                 newPlayer.StartingEntitys.Add(_defaultBasePrefab);
-                Factions.Add(newPlayer);
+                activePlayers.Add(newPlayer);
             }
 
-            foreach (var aS in _aISpawn) { //create Ai player
+            foreach (var aS in _aISpawnLocations) { //create Ai player
                 PlayerSetupDefinition newAI = new PlayerSetupDefinition();
                 newAI.playerID = 1;
                 newAI.playerName = DataManager.Instance.AIName;
@@ -168,14 +178,14 @@ namespace HOME.Game {
                 newAI.playerCredits = 300f;
                 newAI.StartingEntitys.Add(_defaultAIBasePrefab);
                 //newAI.StartingEntitys.Add(_defaultUnitPrefab);
-                Factions.Add(newAI);
+                activePlayers.Add(newAI);
             }
         }
 
         private void PopulatePlayers() {
             //Debug.Log("GameManager: Populate Players");
             int iter = 0;
-            foreach (var faction in Factions) {
+            foreach (var faction in activePlayers) {
                 iter++; // just for parent naming
                 faction.playerName = faction.playerName + " " + iter.ToString(); // set Player Name
                 faction.playerLocation.name = "Player: " + faction.playerName; // rename parent
@@ -222,6 +232,15 @@ namespace HOME.Game {
                 }
             }
         }
+
+        private void AddPlayerResources() {
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Alloy, 500);
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.BauxiteOre, 500);
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Food, 500);
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Energy, 500);
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.Iron, 500);
+            DataManager.Instance.AddResourceAmount(DataManager.ResourceType.IronOre, 500);
+        }
         #endregion
 
         //------------------------------------------ AI--------------------------------------------//
@@ -231,7 +250,7 @@ namespace HOME.Game {
                 return;
             }
             if (_currentDifficulty != null) {
-                Debug.Log("GameManager: Create AI +" + aIName + "Difficulty ID = " + _currentDifficulty.Id);
+                //Debug.Log("GameManager: Create AI +" + aIName + "Difficulty ID = " + _currentDifficulty.Id);
                 for (int i = 0; i < _aIEntitys.Length; i++) {
                     //if difficulty matches Ai use it 
                     if (_currentDifficulty.Id == i) {
@@ -282,7 +301,7 @@ namespace HOME.Game {
             }
             return true;
         }
-        // */
+
         /*
                      navMeshObstacles = null;
                      List<MeshFilter> mfilters = new List<MeshFilter>(entity.GetComponentsInChildren<MeshFilter>()); // collect all meshes on entity
@@ -346,6 +365,15 @@ namespace HOME.Game {
         }
         //------------------------------------------ +Highlights Range Indicator--------------------------------------------//
         //-----------------------------------------Debug stuff--------------------------------------------//
+        private void Debugger() {
+            if (DebugResources) {
+                foreach (DataManager.ResourceType resourceType in System.Enum.GetValues(typeof(DataManager.ResourceType))) {
+                    DataManager.resourceAmountDictionary[resourceType] = 999999f;
+                }
+                return;
+            }
+        }
+
         // clear the particles out of the hierachy
         public static Transform InstanceGraveParent() { // returns parent for instances
             Transform _particleParent;
@@ -371,7 +399,7 @@ namespace HOME.Game {
                 if (DataManager.Instance.PlayerShipHealth >= DataManager.Instance.PlayerShipMaxHealth) {
                     DataManager.Instance.PlayerShipHealth = DataManager.Instance.PlayerShipMaxHealth;
                     return;
-                }  
+                }
 
                 DataManager.ResourceType repairMaterialType = DataManager.ResourceType.IronOre; // reference to repair Material type
 
@@ -381,8 +409,8 @@ namespace HOME.Game {
                     DataManager.Instance.AddResourceAmount(repairMaterialType, -repairThreshholdAmount);//take materials
                     Building.PlayerShip.CurrHealth += 1; // add health
                     Debug.Log(" pHealth " + DataManager.Instance.PlayerShipHealth);
-                }                           
-            } 
+                }
+            }
         }
 
         private void CheckEndGame() {
@@ -394,7 +422,7 @@ namespace HOME.Game {
             }
 
             if (!_isGameOver) {// check if we have set IsGameOver to true, only run this logic once
-                foreach (var u in Factions) {
+                foreach (var u in activePlayers) {
                     if (!u.isAi && u.ActiveUnits.Count <= 0) {
                         Debug.Log("GameManager CheckEndGame No active Player Units! Game Over!");
                         _isGameOver = true;
@@ -452,15 +480,14 @@ namespace HOME.Game {
             _isGameOver = false;
             _debugWin = false;
             // clear Spawnpoints if we come from previous game
-            _humanSpawn.Clear();
-            _aISpawn.Clear();
+            _humanSpawnLocations.Clear();
+            _aISpawnLocations.Clear();
             Debug.Log("RESET");
         }
 
         private void OnDestroy() {
             if (_inGameMenu != null) {
-
-            StopCoroutine(_inGameMenu.CheckQuestCoroutine());
+                StopCoroutine(_inGameMenu.CheckQuestCoroutine());
             }
         }
 

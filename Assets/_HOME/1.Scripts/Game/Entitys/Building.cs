@@ -36,7 +36,7 @@ namespace HOME.Game {
                 CurrHealth + "/" + MaxHealth,
                 GetDescription,
                 GetIcon,
-                "Owner: ",
+                player.isAi,
                 healthBar,
                 hasResources,
                 "",

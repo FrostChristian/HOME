@@ -19,17 +19,17 @@ namespace HOME.UI {
         [Space]
         [SerializeField] private string _mainMenuSceneName = "MainMenu";
         [Header("Objects")]
-        [SerializeField] private GameObject _loadConfirm;
-        [SerializeField] private GameObject[] _trashButtons;
+        [SerializeField] private GameObject _loadConfirm = default;
+        [SerializeField] private GameObject[] _trashButtons = default;
         [Space]
-        [SerializeField] private Text _loadConfirmText;
-        [SerializeField] private Text _menuHeaderText;
-        [SerializeField] private Text _currentGameText;
-        [SerializeField] private Text[] _loadSlotText;
+        [SerializeField] private Text _loadConfirmText = default;
+        [SerializeField] private Text _menuHeaderText = default;
+        [SerializeField] private Text _currentGameText = default;
+        [SerializeField] private Text[] _loadSlotText = default;
         [Space]
-        [SerializeField] private Button _loadBtn;
+        [SerializeField] private Button _loadBtn = default;
         [Header("Transition")]
-        [SerializeField] private TransitionFader _startTransitionPrefab;
+        [SerializeField] private TransitionFader _startTransitionPrefab = default;
         [SerializeField] private float _playDelay = 0.5f;
 
         public static bool _init = false;

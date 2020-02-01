@@ -13,13 +13,13 @@ namespace HOME.UI {
         private string _emptySlot = "Save New";
         private string _usedSlot = "Replace Game ";
 
-        [SerializeField] private GameObject _saveConfirm;
-        [SerializeField] private Text _saveConfirmText;
-        [SerializeField] private Text _currentGameText;
-        [SerializeField] private GameObject[] _trashButtons;
+        [SerializeField] private GameObject _saveConfirm = default;
+        [SerializeField] private Text _saveConfirmText = default;
+        [SerializeField] private Text _currentGameText = default;
+        [SerializeField] private GameObject[] _trashButtons = default;
 
-        [SerializeField] private Text[] _saveSlotText;
-        [SerializeField] private Button _saveBtn;
+        [SerializeField] private Text[] _saveSlotText = default;
+        [SerializeField] private Button _saveBtn = default;
 
         public static bool _initS = false;
 

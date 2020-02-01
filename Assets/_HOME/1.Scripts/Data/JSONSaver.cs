@@ -15,7 +15,7 @@ namespace HOME.Data {
 
 
         public static string GetSaveFilePathFromDisk(int saveNumber) { // gets file that we want to load!
-            return Application.persistentDataPath + "/" + _fileName+ saveNumber.ToString()+_fileExtension;
+            return Application.persistentDataPath + "/" + _fileName + saveNumber.ToString() + _fileExtension;
         }
 
         public void Save(SaveData data) { // save data we pass in
@@ -28,7 +28,7 @@ namespace HOME.Data {
                 writer.Write(jsonGameDataString); // pass game data to writer
             }
             _currentlyActiveSavenumber = _selectetSaveNumber; // set curr Active Save
-            Debug.Log("Saved SaveGame:" + _selectetSaveNumber + " Path:"+ GetSaveFilePathFromDisk(_selectetSaveNumber));
+            Debug.Log("Saved SaveGame:" + _selectetSaveNumber + " Path:" + GetSaveFilePathFromDisk(_selectetSaveNumber));
         }
 
         public bool Load(SaveData data) { // bool for was loading succesfull
@@ -39,10 +39,10 @@ namespace HOME.Data {
                     JsonUtility.FromJsonOverwrite(json, data); // replace values with exsisting saveFile
                 }
                 _currentlyActiveSavenumber = _selectetSaveNumber; // set curr Active Save
-                Debug.Log("Loaded SaveGame:" + _selectetSaveNumber + " Path:"+ GetSaveFilePathFromDisk(_selectetSaveNumber));
+                Debug.Log("Loaded SaveGame:" + _selectetSaveNumber + " Path:" + GetSaveFilePathFromDisk(_selectetSaveNumber));
                 return true; // we loaded!
             }
-            Debug.Log("COULDNT LOAD SaveGame:" + _selectetSaveNumber + " Path:"+ GetSaveFilePathFromDisk(_selectetSaveNumber));
+            Debug.Log("COULDNT LOAD SaveGame:" + _selectetSaveNumber + " Path:" + GetSaveFilePathFromDisk(_selectetSaveNumber));
             return false; // no valid file found
         }
 

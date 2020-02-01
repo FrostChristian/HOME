@@ -11,7 +11,7 @@ public class ScreenFader : MonoBehaviour {
     public float FadeOnDuration { get => _fadeOnDuration; }
     [SerializeField] private float _fadeOffDuration = 2f;
     public float FadeOffDuration { get => _fadeOffDuration; }
-    [SerializeField] private MaskableGraphic[] graphicsToFade; // array of ui elements to fade
+    [SerializeField] private MaskableGraphic[] graphicsToFade = default; // array of ui elements to fade
 
     protected private void SetAlpha(float alpha) { // loop and set alpha to same transp.
         foreach (MaskableGraphic graphic in graphicsToFade) {

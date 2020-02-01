@@ -7,7 +7,7 @@ namespace HOME.Game {
     [RequireComponent(typeof(ScreenFader))] // add screenfader
     public class SplashScreen : MonoBehaviour {
 
-        [SerializeField] private ScreenFader _screenFader;
+        [SerializeField] private ScreenFader _screenFader = default;
         [SerializeField] private float delay = 1f;
 
         private void Awake() {

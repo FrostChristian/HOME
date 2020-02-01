@@ -10,7 +10,7 @@ namespace HOME.UI {
     public class MainMenu : Menu<MainMenu> {
 
         private DataManager _dataManager;
-        [SerializeField] private InputField _inputField;
+        [SerializeField] private InputField _inputField = default;
 
         protected override void Awake() {
             base.Awake();
@@ -41,18 +41,5 @@ namespace HOME.UI {
         public override void OnBackPressed() {
             Application.Quit();
         }
-        /*
-        public void OnPlayerNameValueChanged(string name) {
-            if (_dataManager != null) {
-                _dataManager.PlayerName = name;
-            }
-        }
-        
-        public void OnPlayerNameEndEdit() {
-            if (_dataManager != null) {
-                _dataManager.Save();
-            }
-        }
-*/
     }
 }

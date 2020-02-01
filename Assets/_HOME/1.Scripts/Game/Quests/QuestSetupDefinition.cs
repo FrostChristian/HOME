@@ -6,13 +6,13 @@ namespace HOME.Game {
     [Serializable]
     public class QuestSetupDefinition {
 
-        [SerializeField] private string _name; // used in menu
-        [SerializeField] private int _id; // uniqe id
-        [SerializeField] private Sprite _icon; // image used for menu
-        [SerializeField] [Multiline] private string _descriptionLong; // Long details        
-        [SerializeField] [Multiline] private string _descriptionShort; // general details        
-        [SerializeField] private int _conditionCount; // how often do we have to do this       
-        [SerializeField] private int _progress; // progress ref      
+        [SerializeField] private string _name = default; // used in menu
+        [SerializeField] private int _id = default; // uniqe id
+        [SerializeField] private Sprite _icon = default; // image used for menu
+        [SerializeField] [Multiline] private string _descriptionLong = default; // Long details        
+        [SerializeField] [Multiline] private string _descriptionShort = default; // general details        
+        [SerializeField] private int _conditionCount = default; // how often do we have to do this       
+        [SerializeField] private int _progress = default; // progress ref      
         
         public string Name { get { return _name; } }
         public int Id { get { return _id; } }

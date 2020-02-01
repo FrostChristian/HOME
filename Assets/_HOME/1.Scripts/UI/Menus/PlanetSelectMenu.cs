@@ -16,27 +16,27 @@ namespace HOME.UI {
         public Button playButton;
         //------------------------------------------ Planet Info--------------------------------------------//
         [Header("Planet Info")]
-        [SerializeField] private Text _planetInfo;
-        [SerializeField] private Text _planetNameForConfirmPanel;
-        [SerializeField] private Text _planetDamageToShip;
-        [SerializeField] private Text _planetDistanceToShip;
+        [SerializeField] private Text _planetInfo = default;
+        [SerializeField] private Text _planetNameForConfirmPanel = default;
+        [SerializeField] private Text _planetDamageToShip = default;
+        [SerializeField] private Text _planetDistanceToShip = default;
         [SerializeField] private List<GameObject> _planetPanels = new List<GameObject>();
         //------------------------------------------ +Planet Info--------------------------------------------//
         //------------------------------------------ ShipInfo--------------------------------------------//
         [Header("Player Info")]
-        [SerializeField] private Text _textPlayerDamage;
-        [SerializeField] private Text _textShipDistanceToHome;
-        [SerializeField] private Text _textPlayerName;
-        [SerializeField] private float _calcPlayerDamage;
-        [SerializeField] private float _calcShipDistanceToHome;
+        [SerializeField] private Text _textPlayerDamage = default;
+        [SerializeField] private Text _textShipDistanceToHome = default;
+        [SerializeField] private Text _textPlayerName = default;
+        [SerializeField] private float _calcPlayerDamage = default;
+        [SerializeField] private float _calcShipDistanceToHome = default;
         //------------------------------------------ +ShipInfo--------------------------------------------//
         //------------------------------------------ Transitions--------------------------------------------//
         [SerializeField] private float _playDelay = 1f;
-        [SerializeField] private PlanetTransitionFader startPlanetTransitionPrefab;
-        [SerializeField] private TransitionFader startTransitionPrefab;
-        [SerializeField] private static CanvasGroup _canvasGroup_Static;
+        [SerializeField] private PlanetTransitionFader startPlanetTransitionPrefab = default;
+        [SerializeField] private TransitionFader startTransitionPrefab = default;
+        [SerializeField] private static CanvasGroup _canvasGroup_Static = default;
         public static CanvasGroup CanvasGroup_Static { get => _canvasGroup_Static; set => _canvasGroup_Static = value; }
-        [SerializeField] private Transform _planetSelected;
+        [SerializeField] private Transform _planetSelected = default;
         public Transform PlanetSelected { get => _planetSelected; set => _planetSelected = value; }
         //------------------------------------------ +Transitions--------------------------------------------//
 

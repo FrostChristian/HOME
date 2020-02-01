@@ -136,7 +136,7 @@ namespace HOME.Game {
             if (_gameManager == null) {
                 Debug.Log("MOUSEMANAGER Select Units in Drag No gamemanager found!");
             }
-            foreach (var faction in _gameManager.Factions) {
+            foreach (var faction in _gameManager.activePlayers) {
                 if (!faction.isAi) { // if isAi false== player units
                     foreach (var activeUnit in faction.ActiveUnits) {
                         Vector2 unitScreenPosition = Camera.main.WorldToScreenPoint(activeUnit.transform.position);

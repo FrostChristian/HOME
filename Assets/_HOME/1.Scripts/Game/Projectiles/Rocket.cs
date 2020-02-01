@@ -4,7 +4,7 @@ namespace HOME.Game {
 
     public class Rocket : Projectile {
 
-        [SerializeField] private GameObject _rocketTrailprefab; // trail
+        [SerializeField] private GameObject _rocketTrailprefab = default; // trail
         private GameObject _rocketTrail; //set trail prefab to this
         [SerializeField] private float _turnSpeed = 3f; // rocket lerp speed
 
