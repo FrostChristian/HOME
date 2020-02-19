@@ -13,7 +13,6 @@ namespace HOME.Game {
         [SerializeField] public DataManager.ResourceType resourceType = default; // assign in inspector
 
         [SerializeField] private float resourceGenerationAmount = 0f;
-        public Transform resourceEntityCollectPointTransform;
         public List<GameObject> crates = new List<GameObject>();
 
         public override void Awake() {
@@ -22,10 +21,6 @@ namespace HOME.Game {
             if (tag == "Mine") {
                 ResourceManager.Instance.resourceEntityList.Add(this);
             }
-            if (resourceEntityCollectPointTransform == null) { // if no coll point assigned use own transform
-                resourceEntityCollectPointTransform = transform;
-            }
-
             ClickFunc = () => {         //if i clicked this Resi fire event
                 OnResourceEntityClicked?.Invoke(this, EventArgs.Empty);
             }; // send this to subscriber
@@ -33,7 +28,7 @@ namespace HOME.Game {
 
         public override void Update() {
             base.Update();
-            if (_currInventoryAmount < _maxInventoryAmount) { // inventory full? is regenerating resources?
+            if (_currInventoryAmount < MaxInventoryAmount) { // inventory full? is regenerating resources?
                 if (resourceGenerationAmount != 0f) { // is generation set?
 
                     DataManager.Instance?.AddResourceAmount(resourceType, resourceGenerationAmount); // add it directy to the game!
@@ -42,12 +37,8 @@ namespace HOME.Game {
                 }
                 HandleCrates(); // change look of entity
             } else {
-                _currInventoryAmount = _maxInventoryAmount; // set to max
+                _currInventoryAmount = MaxInventoryAmount; // set to max
             }
-        }
-
-        public Vector3 GetPosition() {
-            return resourceEntityCollectPointTransform.position;
         }
 
         public DataManager.ResourceType GrabResourceType(float amountGrabbed, out float actualAmountTaken) {
@@ -70,7 +61,7 @@ namespace HOME.Game {
 
         private void HandleCrates() { // for optical representation of resurces
             if (crates.Count > 0) { // if crates available
-                float amoutPerCrate = _maxInventoryAmount / crates.Count;
+                float amoutPerCrate = MaxInventoryAmount / crates.Count;
                 for (int i = 0; i < crates.Count; i++) {
                     if (_currInventoryAmount > amoutPerCrate * i) {
                         crates[i].SetActive(true);
@@ -84,7 +75,7 @@ namespace HOME.Game {
         public override void InGameMenuUpdate() { // TODO make better!
             base.InGameMenuUpdate();
             float healthBar = CurrHealth / MaxHealth;
-            float resourceBar = _currInventoryAmount / _maxInventoryAmount;
+            float resourceBar = _currInventoryAmount / MaxInventoryAmount;
             _inGameMenu.SelectionFill(
                 GetName,
                 hasHealth, // has health ?
@@ -96,7 +87,7 @@ namespace HOME.Game {
                 hasResources,
                 "Available Resources: " + resourceType,
                 resourceBar,
-                _currInventoryAmount.ToString() + "/" + _maxInventoryAmount.ToString());
+                _currInventoryAmount.ToString() + "/" + MaxInventoryAmount.ToString());
         }
     }
 }

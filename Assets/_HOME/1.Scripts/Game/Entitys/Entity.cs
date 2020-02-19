@@ -37,15 +37,17 @@ namespace HOME.Game {
 
         [SerializeField] private float deathHealth = 0f;
         public GameObject explosionPrefab;
-
+        
         [Header("Resources")]
         public bool hasResources = true;
+        public bool isStorage = false;
+        [SerializeField] public DataManager.ResourceType takesResourceType = default; // assign in inspector
         [SerializeField] public float _currInventoryAmount = 1f;
-        [SerializeField] public float _maxInventoryAmount = 5000f;
+        [SerializeField] private float maxInventoryAmount = 5000f;
+        public float MaxInventoryAmount { get => maxInventoryAmount; set => maxInventoryAmount = value; }
 
         [Space]
-        public bool isStorage = false;
-        [SerializeField] public DataManager.ResourceType resourceStorageType = default; // assign in inspector
+        //[SerializeField] public DataManager.ResourceType storesResourceType = default; // assign in inspector
 
         [Header("Cost")]
         [SerializeField] private float _ironCost = 0f;
@@ -62,7 +64,10 @@ namespace HOME.Game {
         [HideInInspector] public InGameMenu _inGameMenu;
         [HideInInspector] public PlayerSetupDefinition player;
         public bool showUI = false;
+        public Entity madeBy = default;
         public bool Selected { get { return _selected; } set { _selected = value; } }
+
+
         [SerializeField] private bool _selected = false;
         public GameObject spawnPoint;
         public Action ClickFunc = null;
@@ -82,8 +87,10 @@ namespace HOME.Game {
         public virtual void Awake() {
             CheckPositionOnNavMesh();
             _interactive = GetComponent<Interactive>();
-            if (!player.isAi && !tag.Contains("Ore")) {
-                if (isStorage) {
+            if (!player.isAi && !tag.Contains("Ore")) { // if local player and entity tags ore
+                if (isStorage) { // add on storage klick event
+                    ResourceManager.Instance.ironStorageTransform.Add(spawnPoint.transform);
+                    ResourceManager.Instance.storageEntityList.Add(this);
                     ClickFunc = () => { //if i clicked this storage fire event
                         OnStorageEntityClicked?.Invoke(spawnPoint, EventArgs.Empty);
                     }; // send this to subscriber
@@ -93,13 +100,13 @@ namespace HOME.Game {
                 CheckQuest();
                 //_questManager = GetComponent<QuestManager>();
                 _questManager = FindObjectOfType(typeof(QuestManager)) as QuestManager;
-
-                if (isStorage) {
-                    ResourceManager.Instance.ironStorageTransform.Add(spawnPoint.transform);
-                }
             }
-
-
+        }
+        public Vector3 GetPosition() {
+            return transform.position;
+        }        
+        public DataManager.ResourceType GetStorageType() {
+            return takesResourceType;
         }
 
         private void CheckQuest() {
@@ -208,7 +215,9 @@ namespace HOME.Game {
         public void DestroyEntity() {
             CurrHealth = 0f;
         }
-
+        private void OnDestroy() {
+            ResourceManager.Instance.storageEntityList.Remove(this);
+        }
         public virtual void InGameMenuUpdate() {
             //Debug.Log("Shout");
             if (_inGameMenu == null) {

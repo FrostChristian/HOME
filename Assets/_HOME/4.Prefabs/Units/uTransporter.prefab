@@ -214,6 +214,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -736,10 +737,10 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1736460536341695932, guid: 0d3f81d0a745e244f99c4a30ae43a0b4,
     type: 3}
   hasResources: 1
-  _currInventoryAmount: 0
-  _maxInventoryAmount: 100
   isStorage: 0
-  resourceStorageType: 0
+  takesResourceType: 0
+  _currInventoryAmount: 0
+  maxInventoryAmount: 50
   _ironCost: 100
   _alloyCost: 0
   _foodCost: 0
@@ -755,6 +756,7 @@ MonoBehaviour:
     StartingEntitys: []
     _activeUnits: []
   showUI: 0
+  madeBy: {fileID: 0}
   _selected: 0
   spawnPoint: {fileID: 0}
   _questManager: {fileID: 0}
@@ -938,7 +940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6390254192653944947
 Transform:
   m_ObjectHideFlags: 0
@@ -967,6 +969,7 @@ MeshRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1157,6 +1160,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1594,11 +1598,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9131039294155622916}
     m_Modifications:
+    - target: {fileID: 122232, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 140316, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
       propertyPath: m_Name
       value: Detail_02 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 140316, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 173836, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
@@ -1657,14 +1669,6 @@ PrefabInstance:
     - target: {fileID: 421858, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.3227738
-      objectReference: {fileID: 0}
-    - target: {fileID: 173836, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 122232, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfbcd7687f3640c4db4b45d88a155c1f, type: 3}

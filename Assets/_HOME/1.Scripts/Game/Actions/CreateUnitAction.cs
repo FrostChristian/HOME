@@ -29,6 +29,7 @@ namespace HOME.Game {
 
         public override System.Action GetClickAction() { // add action to button
             if (_spawnPoint.transform == null) {
+                Debug.Log("NO SPAWN");
                 return delegate () {
                 };
             } else {
@@ -37,13 +38,17 @@ namespace HOME.Game {
                     if (_player.isAi) {
                         GameObject go = Instantiate(Prefab, _spawnPoint.transform.position, Quaternion.identity, _player.playerLocation.transform);//rotation default
                         go.GetComponent<Player>().Info = _player;
+                        go.GetComponent<Entity>().madeBy = GetComponent<Entity>();
                     } else {
                         if (_prefabEntity.CheckCost(false)) { // check for resources
                             GameObject go = Instantiate(Prefab, _spawnPoint.transform.position, Quaternion.identity, _player.playerLocation.transform);//rotation default
                             go.GetComponent<Player>().Info.isAi = false;
                             go.AddComponent<ShowActionButton>();
                             go.GetComponent<Player>().Info = _player;
+                            go.GetComponent<Entity>().madeBy = GetComponent<Entity>();
+
                         } else {
+                            Debug.Log("CreateBuildingAction! GetClickAction() Sirious error!");
                         }
                     }
                 };

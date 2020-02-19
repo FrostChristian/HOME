@@ -41,7 +41,7 @@ namespace HOME.Game {
                 hasResources,
                 "",
                 -0f,
-                 _currInventoryAmount.ToString() + "/" + _maxInventoryAmount.ToString());
+                 _currInventoryAmount.ToString() + "/" + MaxInventoryAmount.ToString());
         }
     }
 }

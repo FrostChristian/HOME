@@ -25,11 +25,17 @@ namespace HOME.Game {
         public DataManager.ResourceType _iCarry;
         [SerializeField] private Dictionary<DataManager.ResourceType, float> _inventoryAmountDicctonary = default;
         private Unit _thisUnit;
+        private DataManager.ResourceType _initialResourcetype = DataManager.ResourceType.Empty;
         private Action onArrivedAtPosition;
 
         public void Init(Unit unit) {
             _thisUnit = unit;
+            // get first resource type!
+            _initialResourcetype = _thisUnit.madeBy.GetComponent<Entity>().takesResourceType;
+            //set the nearest resource type to target
+            _resourceEntity = ResourceManager.GetResourceEntityNearPosition_Static(transform.position, _initialResourcetype);
         }
+
 
         private void Awake() {
             _state = State.NotGathering;
@@ -57,69 +63,75 @@ namespace HOME.Game {
 
             switch (_state) {
                 case State.NotGathering:
-                _resourceEntity = ResourceManager.GetResourceEntity_Static();
-                if (_resourceEntity != null) { //if resourceEntity available, try to move towards it
-                    _state = State.MoveToResourceEntity;
-                }
-                break;
+                    //_resourceEntity = ResourceManager.GetResourceEntity_Static();
+                    if (_resourceEntity != null) { //if resourceEntity available, try to move towards it
+                        _state = State.MoveToResourceEntity;
+                    }
+                    break;
 
                 case State.MoveToResourceEntity:
-                if (_thisUnit.IsIdle()) { // are we doing anything more important?
-                    _thisUnit.SendAIToTarget(_resourceEntity.GetPosition(), () => { // move to resourceEntity set Action to call next state
-                        _state = State.CollectingResources;
-                    });
-                }
-                break;
+                    if (_thisUnit.IsIdle()) { // are we doing anything more important?
+                        _thisUnit.SendAIToTarget(_resourceEntity.GetPosition(), () => { // move to resourceEntity set Action to call next state
+                            _state = State.CollectingResources;
+                        });
+                    }
+                    break;
 
                 case State.CollectingResources:
-                if (_thisUnit.IsIdle() && _resourceEntity != null) { // if we can gather and have a resource
-                    if (IsInventoryFull() && _iCarry != _resourceEntity.GetResourceType()) { // if we have a full inventory and got sent to a different resource
-                        DropInventory(); // drop inv
-                    }
-                    if ((IsInventoryFull() || !_resourceEntity.HasResources())) { //if we have a full inventory or the entity has no resources
-                         //Move to Storage                                                         
-                        _storageTransform = ResourceManager.GetStorage_Static(); // get the storage transform!
-                        _resourceEntity = ResourceManager.GetResourceEntityNearPosition_Static(_resourceEntity.GetPosition(), _resourceEntity.GetResourceType()); // if entity depledet look for another on near the depleadet one
-                        _state = State.MoveToStorage;
-                    } else {
-                        if (_iCarry != _resourceEntity.GetResourceType()) { // if we already carrying a different resource, drop inventory
-                            DropInventory();
+                    if (_thisUnit.IsIdle() && _resourceEntity != null) { // if we can gather and have a resource
+                        if (IsInventoryFull() && _iCarry != _resourceEntity.GetResourceType()) { // if we have a full inventory and got sent to a different resource
+                            DropInventory(); // drop inv
                         }
-                        _iCarry = _resourceEntity.GetResourceType(); // ref for what the unit carrys
+                        if ((IsInventoryFull() || !_resourceEntity.HasResources())) { //if we have a full inventory or the entity has no resources
+                                                                                      //Move to Storage                                                         
+                                                                                      //_storageTransform = ResourceManager.GetStorage_Static(); // get any of the storage transforms!
+                            _storageTransform = ResourceManager.GetStorageEntityNearPosition_Static(_thisUnit.GetPosition(), _resourceEntity.GetResourceType()); // get the storage transform!
+                            _resourceEntity = ResourceManager.GetResourceEntityNearPosition_Static(_resourceEntity.GetPosition(), _resourceEntity.GetResourceType()); // if entity depledet look for another on near the depleadet one
+                            _state = State.MoveToStorage;
+                        } else {
+                            if (_iCarry != _resourceEntity.GetResourceType()) { // if we already carrying a different resource, drop inventory
+                                DropInventory();
+                            }
+                            _iCarry = _resourceEntity.GetResourceType(); // ref for what the unit carrys
 
-                        // Gather Resource                                             
-                        switch (_resourceEntity.GetResourceType()) {
-                            case DataManager.ResourceType.Iron:
-                            _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity); // play animation, then, on animation complete Action calls the: GrabResourceFromEntity ()!
-                            break;
-                            case DataManager.ResourceType.Alloy:
-                            _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
-                            break;
-                            case DataManager.ResourceType.Food:
-                            _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
-                            break;
-                            case DataManager.ResourceType.IronOre:
-                            _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
-                            break;
-                            case DataManager.ResourceType.BauxiteOre:
-                            _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
-                            break;
+                            // Gather Resource                                             
+                            switch (_resourceEntity.GetResourceType()) {
+                                case DataManager.ResourceType.Iron:
+                                    _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity); // play animation, then, on animation complete Action calls the: GrabResourceFromEntity ()!
+                                    break;
+                                case DataManager.ResourceType.Alloy:
+                                    _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
+                                    break;
+                                case DataManager.ResourceType.Food:
+                                    _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
+                                    break;
+                                case DataManager.ResourceType.IronOre:
+                                    _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
+                                    break;
+                                case DataManager.ResourceType.BauxiteOre:
+                                    _thisUnit.PlayAnimationMine(_resourceEntity.GetPosition(), GrabResourceFromEntity);
+                                    break;
+                            }
                         }
                     }
-                }
-                break;
+                    break;
 
                 case State.MoveToStorage:
-                if (_thisUnit.IsIdle() && GetTotalInventoryAmount() > 0f && _storageTransform.position != null) {
-                    _thisUnit.SendAIToTarget(_storageTransform.position, () => {
-                        DropInventoryIntoGameResources(); // empty inventory
-                        UpdateUI();
-                        _state = State.NotGathering;
-                    });
-                } else {
-                    _state = State.NotGathering;
-                }
-                break;
+                    Debug.Log("ONCE");
+                    if (_storageTransform != null) { // if we have a storage move to it
+                        if ((_thisUnit.IsIdle() ) && GetTotalInventoryAmount() > 0f) {
+                            _thisUnit.SendAIToTarget(_storageTransform.position, () => {
+                                DropInventoryIntoGameResources(); // empty inventory
+                                UpdateUI();
+                                _state = State.NotGathering;
+                            });
+                        } else {
+                            _state = State.NotGathering;
+                        }
+                    } else if(_storageTransform == null && _state == State.MoveToStorage) {
+                        _storageTransform = ResourceManager.GetStorageEntityNearPosition_Static(_thisUnit.GetPosition(), _resourceEntity.GetResourceType()); // cooroutine
+                    }
+                    break;
             }
         }
 
@@ -157,7 +169,7 @@ namespace HOME.Game {
             }
         }
 
-        public void Reset() {
+        public void ResetGatherer() {
             _resourceEntity = null;
             _state = State.NotGathering;
         }
@@ -173,12 +185,12 @@ namespace HOME.Game {
         }
 
         private bool IsInventoryFull() {
-            return GetTotalInventoryAmount() >= _thisUnit._maxInventoryAmount;
+            return GetTotalInventoryAmount() >= _thisUnit.MaxInventoryAmount;
         }
 
         private void GrabResourceFromEntity() {
-            if (intakeCapacity > _thisUnit._maxInventoryAmount) { // make sure it doesent take more than it can carry
-                intakeCapacity = _thisUnit._maxInventoryAmount;
+            if (intakeCapacity > _thisUnit.MaxInventoryAmount) { // make sure it doesent take more than it can carry
+                intakeCapacity = _thisUnit.MaxInventoryAmount;
             }
 
             float actualAmountTaken; // store amount we want to take

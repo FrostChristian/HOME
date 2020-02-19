@@ -13,7 +13,7 @@ namespace HOME.Game {
 
         private static MouseManager _instance;
         public static MouseManager Instance { get { return _instance; } }
-        public List<Interactive> selectedUnits = new List<Interactive>(); // selected units
+        public  List<Interactive> selectedUnits = new List<Interactive>(); // selected units
         private GameManager _gameManager;
         public GameObject _rightClickIndicPrefab;
 

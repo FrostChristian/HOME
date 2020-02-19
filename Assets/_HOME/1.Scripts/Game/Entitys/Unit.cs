@@ -60,22 +60,22 @@ namespace HOME.Game {
         }
 
         public void FixedUpdate() {
-            if (eCrates.Count >0) {
+            if (eCrates.Count > 0) {
                 HandleCrates(); // change look of entity
             }
             if (Selected) {
-            InGameMenuUpdate();
+                InGameMenuUpdate();
             }
             switch (state) {
                 case State.Idle:
-                WaitingForTarget();
-                break;
+                    WaitingForTarget();
+                    break;
 
                 case State.Moving:
-                WaitingForTarget();
-                break;
+                    WaitingForTarget();
+                    break;
                 case State.Animating:
-                break;
+                    break;
             }
         }
         // -----------------------------------------------AI Behavior -----------------------------------------------//
@@ -99,6 +99,7 @@ namespace HOME.Game {
             StartCoroutine(NavMeshAgentObsticalSwitch());
         }
         // ----------------------------------------------- +AI Behavior -----------------------------------------------//
+        // ----------------------------------------------- Movement -----------------------------------------------//
 
         public void WaitingForTarget() {
             if (_hasMinimapTarget) {
@@ -114,22 +115,34 @@ namespace HOME.Game {
                 && !MouseManager.IsPointerOverUI()) { // is Pointer over UI?
 
                 // all yes? then go!                                       
+
                 Vector3? tempTarget = _gameManager.ScreenPointToMapPosition(Input.mousePosition);
                 if (tempTarget.HasValue) {
-                    _target = tempTarget.Value;
+                    _target = tempTarget.Value; // set temp value to actve target
 
                     if (_gathererAI != null) { // let the gatherer know the player klicked!
-                        _gathererAI.Reset();
+                        _gathererAI.ResetGatherer();
                     }
                     MouseManager.Instance.MarkTarget(_target, Color.red);
                     _onArrivedAtPosition = null;  // cancel action
+                    Debug.Log("Cancel Action");
                     StartCoroutine(NavMeshAgentObsticalSwitch());
                 } else {
                     Debug.Log("NO TARGET");
                 }
             }
         }
-
+        /*
+        /// make a list of target positions
+        List<Vector3> movePosList = new List<Vector3> {
+                        _target,
+                        _target + new Vector3(10,0,0),
+                        _target + new Vector3(20,0,0),
+                        _target + new Vector3(30,0,0),
+                    };
+        int postionIndex = 0;
+        _target = movePosList[postionIndex];
+                    postionIndex = (postionIndex + 1) % movePosList.Count;*/
         public void SendToMiniMapTarget(Vector3 miniMapTarget) {
             if (Selected // are we selected?
                 && MouseManager.Instance.enabled  // MM enabeled?
@@ -137,7 +150,7 @@ namespace HOME.Game {
 
                 // all yes? then go!
                 if (_gathererAI != null) { // let the gatherer know the player klicked!
-                    _gathererAI.Reset();
+                    _gathererAI.ResetGatherer();
                 }
 
                 _target = miniMapTarget;
@@ -167,19 +180,23 @@ namespace HOME.Game {
         }
 
         IEnumerator CheckAgentDestinations() {
-
-            while (Vector3.Distance(this.transform.position, _target) > stopDistance ) {
+            while (Vector3.Distance(transform.position, _target) > stopDistance) {
+                //Debug.Log(Vector3.Distance(transform.position, _target) + " stopDistance: " + stopDistance);
+                //Debug.Log(moveTimer);
                 if (moveTimer > 0) { //movement check timer -> making sure the unit is not stuck at its current position
                     moveTimer -= Time.deltaTime;
                 }
-                if (moveTimer < 0) {//the movement check duration is hardcoded to 2 seconds, while this is only a temporary solution for the units getting stuck issue, a more optimal solution will be soon presented
+                if (moveTimer < 0.1) {//the movement check duration is hardcoded to 2 seconds, while this is only a temporary solution for the units getting stuck issue, a more optimal solution will be soon presented
+                    //Debug.Log(Vector3.Distance(transform.position, lastPosition) + " stopDistance: " + 0.2f);
+
                     if (Vector3.Distance(transform.position, lastPosition) <= 0.2f) { // if unit stuck give  itmore accses!
                         CheckPositionOnNavMesh();
                         //_agent.isStopped = true;
                         if (_gathererAI != null) {
+                            Debug.Log("Widen NavemashAgents Options");
                             stopDistance += .5f;
                             _agent.avoidancePriority += 1;
-                            _gathererAI.Reset();
+                            //_gathererAI.ResetGatherer();
                         }
                     }
                     RefreshTimer();
@@ -203,11 +220,12 @@ namespace HOME.Game {
             }
             state = State.Idle;
         }
+        // ----------------------------------------------- +Movement -----------------------------------------------//
 
         private void HandleCrates() { // for optical representation of resurces
             GetInventoryAmount();
             if (eCrates.Count > 0) { // if crates available
-                float amoutPerCrate = _maxInventoryAmount / eCrates.Count;
+                float amoutPerCrate = MaxInventoryAmount / eCrates.Count;
                 for (int i = 0; i < eCrates.Count; i++) {
                     if (_currInventoryAmount > amoutPerCrate * i) {
                         eCrates[i].SetActive(true);
@@ -218,7 +236,7 @@ namespace HOME.Game {
             }
         }
         private void RefreshTimer() {
-            moveTimer = 1.0f; //launch the timer
+            moveTimer = 0.20f; //launch the timer
             lastPosition = transform.position; //set this is as the last registered position.
         }
 
@@ -238,7 +256,7 @@ namespace HOME.Game {
                 healthBar,
                 hasResources,
                 GetInventoryDescription(),
-                _currInventoryAmount / _maxInventoryAmount,
+                _currInventoryAmount / MaxInventoryAmount,
                 GetInventoryAmount());
         }
 
@@ -253,7 +271,7 @@ namespace HOME.Game {
         }
 
         private float GetInventorySliderAmount() {
-            return _currInventoryAmount / _maxInventoryAmount;
+            return _currInventoryAmount / MaxInventoryAmount;
         }
 
         public string GetInventoryAmount() {
@@ -265,7 +283,7 @@ namespace HOME.Game {
             return "";
         }
 
-         public void UpdateInverntoryText(string resourceType, float totalInventoryAmount) {
+        public void UpdateInverntoryText(string resourceType, float totalInventoryAmount) {
             InGameMenuUpdate();
         }
         #endregion

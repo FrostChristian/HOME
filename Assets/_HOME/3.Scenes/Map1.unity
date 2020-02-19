@@ -3121,7 +3121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugWin: 0
-  DebugResources: 0
+  DebugResources: 1
   iWon: 0
   activePlayers: []
   _humanSpawnLocations: []
@@ -3132,7 +3132,7 @@ MonoBehaviour:
     type: 3}
   _defaultAIBasePrefab: {fileID: 117486293182392186, guid: e7754717b1bf24849a7ad0c1f6a31ba5,
     type: 3}
-  _aIEnabled: 1
+  _aIEnabled: 0
   _spawnEnemys: 1
   _aIEntitys:
   - {fileID: 8968293440675117820, guid: edaa637110502be4aa903c6ed3dbe810, type: 3}
