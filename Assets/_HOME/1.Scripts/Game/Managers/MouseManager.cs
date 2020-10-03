@@ -13,7 +13,7 @@ namespace HOME.Game {
 
         private static MouseManager _instance;
         public static MouseManager Instance { get { return _instance; } }
-        public  List<Interactive> selectedUnits = new List<Interactive>(); // selected units
+        public List<Interactive> selectedUnits = new List<Interactive>(); // selected units
         private GameManager _gameManager;
         public GameObject _rightClickIndicPrefab;
 
@@ -57,16 +57,16 @@ namespace HOME.Game {
             switch (_state) {
                 case State.clickOrDrag:
 
-                ClickOrDrag();
-                break;
+                    ClickOrDrag();
+                    break;
 
                 case State.clickSelect:
-                SelectSingleUnit();
-                break;
+                    SelectSingleUnit();
+                    break;
 
                 case State.clickDeselect:
-                DeselectAll();
-                break;
+                    DeselectAll();
+                    break;
             }
         }
 
@@ -78,19 +78,19 @@ namespace HOME.Game {
         public void DeselectAll() {
             if (selectedUnits.Count > 0) {
                 for (int i = 0; i < selectedUnits.Count; i++) {
-                    selectedUnits[i].Deselect(); //deselect unit
+                    selectedUnits[i].Deselect();
                 }
-                selectedUnits.Clear();//clear list
-                ResourceManager.Instance.selectedGathererAIList.Clear(); // clear gatherer list
+                selectedUnits.Clear();
+                ResourceManager.Instance.selectedGathererAIList.Clear();
             }
-            if (selectedUnits.Count == 0) { // if 0 again enter new state
+            if (selectedUnits.Count == 0) {
                 _state = State.clickOrDrag;
             }
         }
 
         private void ClickOrDrag() {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // cast ray from mouse pos
-            RaycastHit hit; // store hit
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
             EventSystem es = EventSystem.current; // reference to EV for click inputs
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity) && !IsPointerOverUI()) { // See if ray hits anything aslong as not over ui
@@ -247,10 +247,8 @@ namespace HOME.Game {
 
         public static bool IsPointerOverUI() {
             if (EventSystem.current.IsPointerOverGameObject()) {
-                //Debug.Log("Over UI");
                 return true;
             } else {
-                //Debug.Log("Not Over UI");
                 PointerEventData pe = new PointerEventData(EventSystem.current);
                 pe.position = Input.mousePosition;
                 List<RaycastResult> hits = new List<RaycastResult>();

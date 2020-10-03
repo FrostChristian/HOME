@@ -16,7 +16,7 @@ namespace HOME.Game {
 
         private void Start() {
             _gameManager = FindObjectOfType<GameManager>();
-            MouseManager.Instance.enabled = false;// DEL 09_05
+            MouseManager.Instance.enabled = false;
             rend = GetComponentsInChildren<Renderer>();
         }
 

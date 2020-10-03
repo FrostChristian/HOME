@@ -16,7 +16,7 @@ namespace HOME.Game {
 
         public List<PlanetSetupDefinition> RandomPlanets = new List<PlanetSetupDefinition>(); // hilds spawned planet info
         [SerializeField] private List<Transform> _spawnLocation = new List<Transform>(); // spawn location in scene
-      [SerializeField] private List<GameObject> _randomPlanet = new List<GameObject>(); // holds all planet prefabs
+        [SerializeField] private List<GameObject> _randomPlanet = new List<GameObject>(); // holds all planet prefabs
 
         // Holding Planet Info in these:
         [SerializeField] private PlanetSelectMenu _planetSelectMenu = default;
@@ -113,8 +113,6 @@ namespace HOME.Game {
 
         private void OnDestroy() {
             _spawnLocation.Clear();
-            Debug.Log("PlanetManager Destroyed");
-            //SAVE PLANET INFO TO DATA
         }
     }
 }

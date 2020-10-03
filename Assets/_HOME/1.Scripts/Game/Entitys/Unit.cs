@@ -48,7 +48,7 @@ namespace HOME.Game {
             _gathererAI = GetComponent<GatherAI>();
             _gameManager = FindObjectOfType<GameManager>();
 
-            if (_gathererAI != null) { // only do it if unit has gatherer ai
+            if (_gathererAI != null) {
                 _gathererAI.Init(this);
             }
 
@@ -94,7 +94,6 @@ namespace HOME.Game {
             _onArrivedAtPosition = onArrivedAtPosition;
             _agent = GetComponent<NavMeshAgent>();
             _target = pos;
-            //MouseManager.Instance.MarkTarget(_target, Color.blue); // mark target on map
             state = State.Moving;
             StartCoroutine(NavMeshAgentObsticalSwitch());
         }
@@ -132,17 +131,7 @@ namespace HOME.Game {
                 }
             }
         }
-        /*
-        /// make a list of target positions
-        List<Vector3> movePosList = new List<Vector3> {
-                        _target,
-                        _target + new Vector3(10,0,0),
-                        _target + new Vector3(20,0,0),
-                        _target + new Vector3(30,0,0),
-                    };
-        int postionIndex = 0;
-        _target = movePosList[postionIndex];
-                    postionIndex = (postionIndex + 1) % movePosList.Count;*/
+
         public void SendToMiniMapTarget(Vector3 miniMapTarget) {
             if (Selected // are we selected?
                 && MouseManager.Instance.enabled  // MM enabeled?
@@ -181,22 +170,18 @@ namespace HOME.Game {
 
         IEnumerator CheckAgentDestinations() {
             while (Vector3.Distance(transform.position, _target) > stopDistance) {
-                //Debug.Log(Vector3.Distance(transform.position, _target) + " stopDistance: " + stopDistance);
-                //Debug.Log(moveTimer);
+
                 if (moveTimer > 0) { //movement check timer -> making sure the unit is not stuck at its current position
                     moveTimer -= Time.deltaTime;
                 }
                 if (moveTimer < 0.1) {//the movement check duration is hardcoded to 2 seconds, while this is only a temporary solution for the units getting stuck issue, a more optimal solution will be soon presented
-                    //Debug.Log(Vector3.Distance(transform.position, lastPosition) + " stopDistance: " + 0.2f);
 
                     if (Vector3.Distance(transform.position, lastPosition) <= 0.2f) { // if unit stuck give  itmore accses!
                         CheckPositionOnNavMesh();
-                        //_agent.isStopped = true;
                         if (_gathererAI != null) {
                             Debug.Log("Widen NavemashAgents Options");
                             stopDistance += .5f;
                             _agent.avoidancePriority += 1;
-                            //_gathererAI.ResetGatherer();
                         }
                     }
                     RefreshTimer();
@@ -240,7 +225,7 @@ namespace HOME.Game {
             lastPosition = transform.position; //set this is as the last registered position.
         }
 
-        #region InGameMenuUpdate Stuff
+        #region InGameMenuUpdate 
 
         public override void InGameMenuUpdate() {
             base.InGameMenuUpdate();

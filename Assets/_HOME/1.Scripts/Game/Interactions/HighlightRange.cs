@@ -12,7 +12,6 @@ namespace HOME.Game {
             base.Awake();
             if (_rangeProjector == null) {
                 Destroy(this);
-                Debug.Log("RangeDisplay Awake No Projector! " + name);
                 return;
             }
             GameManager.playerRangeProjectors.Add(_rangeProjector);

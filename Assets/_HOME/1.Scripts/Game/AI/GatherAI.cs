@@ -59,8 +59,6 @@ namespace HOME.Game {
         }
 
         private void Update() {
-            //Debug.Log("Gather AI: State:  " + _state);
-
             switch (_state) {
                 case State.NotGathering:
                     //_resourceEntity = ResourceManager.GetResourceEntity_Static();
@@ -117,9 +115,8 @@ namespace HOME.Game {
                     break;
 
                 case State.MoveToStorage:
-                    Debug.Log("ONCE");
                     if (_storageTransform != null) { // if we have a storage move to it
-                        if ((_thisUnit.IsIdle() ) && GetTotalInventoryAmount() > 0f) {
+                        if ((_thisUnit.IsIdle()) && GetTotalInventoryAmount() > 0f) {
                             _thisUnit.SendAIToTarget(_storageTransform.position, () => {
                                 DropInventoryIntoGameResources(); // empty inventory
                                 UpdateUI();
@@ -128,7 +125,7 @@ namespace HOME.Game {
                         } else {
                             _state = State.NotGathering;
                         }
-                    } else if(_storageTransform == null && _state == State.MoveToStorage) {
+                    } else if (_storageTransform == null && _state == State.MoveToStorage) {
                         _storageTransform = ResourceManager.GetStorageEntityNearPosition_Static(_thisUnit.GetPosition(), _resourceEntity.GetResourceType()); // cooroutine
                     }
                     break;
@@ -177,7 +174,6 @@ namespace HOME.Game {
         public void MovedToStorage(Transform storageTransform) {
             _storageTransform = storageTransform;
             _state = State.MoveToStorage;
-            Debug.Log("Player Moved me to Storage");
         }
 
         public void SetResourceEntity(Resource resourceEntity) {

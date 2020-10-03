@@ -13,7 +13,6 @@ namespace HOME.Game {
         public bool planetSelected;
 
         public PlanetSetupDefinition(int pNr, string pInfo, float pDistanceTS, float pDamageTS, Transform pobj, bool pPicked) {
-            //public PlanetSetupDefinition(int pNr, string pInfo, float pDistanceTS, float pDamageTS, Transform pTransform, bool pPicked) {
             planetID = pNr;
             planetInfo = pInfo;
             planetDistanceToShip = pDistanceTS;

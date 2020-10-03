@@ -12,7 +12,6 @@ namespace HOME.Game {
     [RequireComponent(typeof(Interactive))]
     [RequireComponent(typeof(Player))]
     public abstract class Entity : BaseInteraction {
-        //public enum EntityTypes { none, unit, building, resource };
 
         //events
         public static event EventHandler OnStorageEntityClicked;
@@ -37,7 +36,7 @@ namespace HOME.Game {
 
         [SerializeField] private float deathHealth = 0f;
         public GameObject explosionPrefab;
-        
+
         [Header("Resources")]
         public bool hasResources = true;
         public bool isStorage = false;
@@ -47,7 +46,6 @@ namespace HOME.Game {
         public float MaxInventoryAmount { get => maxInventoryAmount; set => maxInventoryAmount = value; }
 
         [Space]
-        //[SerializeField] public DataManager.ResourceType storesResourceType = default; // assign in inspector
 
         [Header("Cost")]
         [SerializeField] private float _ironCost = 0f;
@@ -76,7 +74,7 @@ namespace HOME.Game {
         [SerializeField] private QuestManager _questManager = default;
 
         void OnMouseOver() {
-            if (Input.GetMouseButtonUp(1)) { // only on rightclick
+            if (Input.GetMouseButtonUp(1)) {
                 if (MouseManager.IsPointerOverUI()) {
                     return; // Over UI!
                 }
@@ -98,13 +96,12 @@ namespace HOME.Game {
                 _buttons = GetComponent<ShowActionButton>();
 
                 CheckQuest();
-                //_questManager = GetComponent<QuestManager>();
                 _questManager = FindObjectOfType(typeof(QuestManager)) as QuestManager;
             }
         }
         public Vector3 GetPosition() {
             return transform.position;
-        }        
+        }
         public DataManager.ResourceType GetStorageType() {
             return takesResourceType;
         }
@@ -113,7 +110,6 @@ namespace HOME.Game {
             QuestSetupDefinition currentQuest = QuestManager.Instance.GetCurrentQuest();
             if (tag == "DefenseEntity" && currentQuest.Id == 2) {
                 QuestManager.Instance.GetCurrentQuest().Progress++;
-                //Debug.Log(" QuestManager.Instance.GetCurrentQuest().Progress" + QuestManager.Instance.GetCurrentQuest().Progress);
             } else {
             }
         }
@@ -192,7 +188,7 @@ namespace HOME.Game {
                 if (addTooltip) TooltipWarning.ShowTooltip_Static("Not enough Food");
                 return false;
             }
-           
+
             return true;
         }
         public void GetCost() {
@@ -219,10 +215,8 @@ namespace HOME.Game {
             ResourceManager.Instance.storageEntityList.Remove(this);
         }
         public virtual void InGameMenuUpdate() {
-            //Debug.Log("Shout");
             if (_inGameMenu == null) {
                 _inGameMenu = FindObjectOfType<InGameMenu>(); //get Ingamemenu
-                Debug.Log("Entity; INGAMEMENUUPDATE Had to assign IngameMenu");
             }
         }
     }

@@ -15,10 +15,8 @@ namespace HOME.Game {
         }
 
         void Update() {
-            //Income
             if (player.isAi) {
                 player.playerCredits += CreditsPerSecond;
-                //DataManager.Instance.AICredits = player.playerCredits; 
             }
 
             if (!player.isAi) {

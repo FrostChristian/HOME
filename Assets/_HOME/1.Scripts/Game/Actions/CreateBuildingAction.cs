@@ -17,7 +17,7 @@ namespace HOME.Game {
             }
         }
 
-        public override System.Action GetClickAction() { // add clickaction to the button
+        public override System.Action GetClickAction() {
             return delegate () {
 
                 if (_prefabEntity.CheckCost(true)) {// check for resources

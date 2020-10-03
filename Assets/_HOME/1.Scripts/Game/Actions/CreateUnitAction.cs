@@ -19,17 +19,16 @@ namespace HOME.Game {
             _player = GetComponent<Player>().Info;
             if (GetComponent<Building>() != null) {
 
-            _spawnPoint = GetComponent<Building>().spawnPoint;
+                _spawnPoint = GetComponent<Building>().spawnPoint;
             }
             if (GetComponent<Resource>() != null) {
-            _spawnPoint = GetComponent<Resource>().spawnPoint;
+                _spawnPoint = GetComponent<Resource>().spawnPoint;
 
             }
         }
 
         public override System.Action GetClickAction() { // add action to button
             if (_spawnPoint.transform == null) {
-                Debug.Log("NO SPAWN");
                 return delegate () {
                 };
             } else {
@@ -48,7 +47,7 @@ namespace HOME.Game {
                             go.GetComponent<Entity>().madeBy = GetComponent<Entity>();
 
                         } else {
-                            Debug.Log("CreateBuildingAction! GetClickAction() Sirious error!");
+                            Debug.Log("CreateBuildingAction! GetClickAction() serious error!");
                         }
                     }
                 };

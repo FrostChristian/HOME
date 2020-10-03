@@ -72,13 +72,13 @@ namespace HOME.Game {
             }
         }
 
-        public override void InGameMenuUpdate() { // TODO make better!
+        public override void InGameMenuUpdate() {
             base.InGameMenuUpdate();
             float healthBar = CurrHealth / MaxHealth;
             float resourceBar = _currInventoryAmount / MaxInventoryAmount;
             _inGameMenu.SelectionFill(
                 GetName,
-                hasHealth, // has health ?
+                hasHealth,
                 CurrHealth + "/" + MaxHealth,
                 GetDescription,
                 GetIcon,

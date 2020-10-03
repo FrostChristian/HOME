@@ -31,23 +31,17 @@ namespace HOME.Game {
         public void OnPointerEnter(PointerEventData eventData) {
             _source.PlayOneShot(MenuManager.Instance.mouseHover);
             MouseOverOnceTooltipFunc?.Invoke();
-
-            //Debug.Log("The cursor entered the selectable UI element. " + eventData);
         }
 
         public void OnPointerClick(PointerEventData eventData) {
             MenuManager.Instance.PlayClickSound();
-            //Debug.Log("The cursor clicked the selectable UI element. " + eventData);
         }
 
         public void OnPointerExit(PointerEventData eventData) {
             MouseOutOnceTooltipFunc?.Invoke();
-            //Debug.Log("The cursor exited the selectable UI element. " + eventData);
         }
 
         public void OnBeginDrag(PointerEventData data) {
-            //Debug.Log("OnBeginDrag: " + data.position);
-            //data.pointerDrag = null;
         }
 
         public void OnDrag(PointerEventData data) {

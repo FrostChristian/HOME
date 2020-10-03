@@ -26,7 +26,6 @@ namespace HOME.Game {
                 if (player.playerName == playerName) {
 
                     _aIPlayers = player;
-                    //Debug.Log("I should be AI" + player.playerName);
                 }
             }
             //Implement AI support
@@ -58,7 +57,6 @@ namespace HOME.Game {
                     bestAi = ai;
                 }
             }
-            //Debug.Log("AI Controller: "+aiLog);
             bestAi.Execute();
             waited = 0;
         }

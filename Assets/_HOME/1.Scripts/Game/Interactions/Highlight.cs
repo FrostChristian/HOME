@@ -17,7 +17,6 @@ namespace HOME.Game {
         public virtual void Awake() {
             if (DisplayItem == null) {
                 Destroy(this);
-                Debug.Log("Hightlight Awake No display item!" + name);
                 return;
             }
             _rend = DisplayItem.GetComponent<SpriteRenderer>();

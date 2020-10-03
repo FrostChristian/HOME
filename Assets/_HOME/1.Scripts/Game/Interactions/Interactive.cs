@@ -5,14 +5,14 @@ using UnityEngine;
 namespace HOME.Game {
 
     public class Interactive : MonoBehaviour {
-        private bool _Selected = false; //already selected?
+        private bool _Selected = false;
         public bool Selected { get { return _Selected; } }
 
         public bool SelectDeselect = false;
 
         public void Select() {
             _Selected = true;
-            foreach (BaseInteraction selection in GetComponents<BaseInteraction>()) { // On unit selection, get all 'interactionsXYZ : BaseInteraction' and call their select() methods
+            foreach (BaseInteraction selection in GetComponents<BaseInteraction>()) {
                 selection.Select();
             }
         }
@@ -21,7 +21,6 @@ namespace HOME.Game {
             _Selected = false;
             foreach (BaseInteraction selection in GetComponents<BaseInteraction>()) {
                 if (selection.gameObject == null) {
-                    Debug.Log("Interactive Deselect(): Selection Destroyed");
                     continue;
                 } else {
 

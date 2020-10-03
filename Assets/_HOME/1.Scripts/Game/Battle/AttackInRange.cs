@@ -112,7 +112,7 @@ namespace HOME.Game {
             GameObject nearestEnemy = null;
             foreach (var player in _gameManager.activePlayers) { // look for the players units
                 if (player == _player) {
-                    continue; //skip rest of code
+                    continue;
                 }
                 foreach (var unit in player.ActiveUnits) { //anything in attakRange to attack the players units?
                     float distToEnemy = Vector3.Distance(transform.position, unit.transform.position);
@@ -135,10 +135,10 @@ namespace HOME.Game {
                 return;
             }
 
-            _targetInfo.CurrHealth -= _attackDamage; // TODOdo this on hit
+            _targetInfo.CurrHealth -= _attackDamage;
 
             GameObject go = Instantiate(_impactEffect, _target.transform.position, Quaternion.identity, GameManager.InstanceGraveParent());
-            Destroy(go, 1f); //destroy go after 1 seconds
+            Destroy(go, 1f);
 
             foreach (var weapon in _projectileSpawnPoint) {
                 if (rocketLauncher) {

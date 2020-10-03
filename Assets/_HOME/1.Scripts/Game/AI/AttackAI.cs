@@ -16,7 +16,6 @@ namespace HOME.Game {
 
         public override void Execute() {
             var ai = AISupport.GetSupport(this.gameObject); // get AI and pass in this
-            //Debug.Log(ai.Player.playerName + " is attacking");
 
             int wave = (int)(ai.AIUnits.Count * attackSquadSize); // current wave size
             dronesRequired += increasedPerWave; // increse drones required

@@ -68,27 +68,23 @@ namespace HOME.Game {
             MouseManager.OnGathererClicked += GathererAI_OnGathererClicked; //get clicked gatherer AI
         }
         private void GathererAI_OnGathererClicked(object sender, EventArgs e) {
-            //Debug.Log("Gatherer Clicked! : "+sender);
             GatherAI gathererAI = sender as GatherAI;
             selectedGathererAIList.Add(gathererAI);
         }
 
         private void ResourceEntity_OnResourceEntityClicked(object sender, EventArgs e) {// function called when clicked on node
-            Debug.Log("Resource Clicked! : " + sender);
             Resource resourceEntity = sender as Resource; // cast obj to ResEnt.
             if (selectedGathererAIList.Count != 0) {
 
                 foreach (var gatherer in selectedGathererAIList) {
                     gatherer.SetResourceEntity(resourceEntity);
                 }
-                Debug.Log(" Selected gatherer AI On Its Way");
             } else {
                 Debug.Log(" Selected gatherer AI is null, no one is selected");
             }
         }
 
         private void Storage_OnStorageEntityClicked(object sender, EventArgs e) {// function called when clicked on node
-            Debug.Log("Storage Clicked! : " + sender);
             Transform storageEntity = sender as Transform; // cast obj to ResEnt.
             if (selectedGathererAIList.Count != 0) {
                 foreach (var gatherer in selectedGathererAIList) {
@@ -139,16 +135,13 @@ namespace HOME.Game {
             return Instance.GetResourceEntityNearPosition(position, resourceType);
         }
         private void Update() {
-            Debug.Log( storageEntityList.Count);
+            Debug.Log(storageEntityList.Count);
         }
-        
+
         private Transform GetStorageEntityNearPosition(Vector3 position, DataManager.ResourceType resourceType) {
-            float maxDistance = 100f; // from position
+            float maxDistance = 100f;
             List<Entity> tmpStorageEntityList = new List<Entity>(storageEntityList); // clone the resource node list
             for (int i = 0; i < tmpStorageEntityList.Count; i++) {
-                Debug.Log(tmpStorageEntityList[i].isStorage);
-                Debug.Log(Vector3.Distance(position, tmpStorageEntityList[i].GetPosition()) > maxDistance);
-                Debug.Log("GetStorageType: " + tmpStorageEntityList[i].GetStorageType() + " resourceType: " + resourceType);
                 if (!tmpStorageEntityList[i].isStorage ||// remove the entity if: it is not a storage
                     Vector3.Distance(position, tmpStorageEntityList[i].GetPosition()) > maxDistance || // or to faar away,
                     tmpStorageEntityList[i].GetStorageType() != resourceType) { // or other resource than specified
@@ -159,7 +152,6 @@ namespace HOME.Game {
             if (tmpStorageEntityList.Count > 0) { // if not emty return target
                 return tmpStorageEntityList[UnityEngine.Random.Range(0, tmpStorageEntityList.Count)].spawnPoint.transform; // return random entity if list is bigger than 0
             } else {
-                Debug.Log("NO Storage ENTITY IN LIST");
                 return null; // if emty == no storage there!
             }
         }
@@ -167,7 +159,7 @@ namespace HOME.Game {
         public static Transform GetStorageEntityNearPosition_Static(Vector3 position, DataManager.ResourceType resourceType) {
             return Instance.GetStorageEntityNearPosition(position, resourceType);
         }
-        
+
 
         public void SetStorageEntity(Transform storageTransform) {
             this.storageTransform = storageTransform;

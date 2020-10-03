@@ -250,7 +250,6 @@ namespace HOME.Game {
                 return;
             }
             if (_currentDifficulty != null) {
-                //Debug.Log("GameManager: Create AI +" + aIName + "Difficulty ID = " + _currentDifficulty.Id);
                 for (int i = 0; i < _aIEntitys.Length; i++) {
                     //if difficulty matches Ai use it 
                     if (_currentDifficulty.Id == i) {
@@ -259,7 +258,6 @@ namespace HOME.Game {
                     }
                 }
             } else {
-
                 Debug.Log("GAMEMANAGER CreateAI() NO CURRENT DIFFICULTY COULD BE FOUND");
             }
         }
@@ -301,49 +299,6 @@ namespace HOME.Game {
             }
             return true;
         }
-
-        /*
-                     navMeshObstacles = null;
-                     List<MeshFilter> mfilters = new List<MeshFilter>(entity.GetComponentsInChildren<MeshFilter>()); // collect all meshes on entity
-                     List<Vector3[]> meshVertList = new List<Vector3[]>(); // list with verts for each mesh on entity
-                     List<Collider> colliderList = new List<Collider>(); // list for all collidable objets
-                     navMeshObstacles = FindObjectsOfType<NavMeshObstacle>(); // find all obsticles
-
-                     foreach (MeshFilter filter in mfilters) { // get verts for each mesh
-                         if (filter.mesh.isReadable) { // only add readable meshes
-                             meshVertList.Add(filter.mesh.vertices);
-                         }
-                     }
-
-                     foreach (var obsticle in navMeshObstacles) { // get colliders of obsticles
-                         if (obsticle.gameObject != entity) { // ignore own obsticle
-                             colliderList.Add(obsticle.gameObject.GetComponent<Collider>()); // add colliders
-                         }
-                     }
-
-                     foreach (var meshVert in meshVertList) {
-                         foreach (var vert in meshVert) {
-                             NavMeshHit hit;
-                             Vector3 vertWorldPos = entity.transform.TransformPoint(vert); // get vert world position
-                             NavMesh.SamplePosition(vertWorldPos, out hit, 50, NavMesh.AllAreas); // vert pos to NavMesh
-                 //Debug.Break();
-                             bool onXAxis = Mathf.Abs(hit.position.x - vertWorldPos.x) < 0.5f; // is distance x in range?
-                             bool onZAxis = Mathf.Abs(hit.position.z - vertWorldPos.z) < 0.5f; // is distance y in range? 
-                             foreach (Collider collider in colliderList) {
-                                 //Debug.Log("Collider: "+ collider.bounds.Contains(vertWorldPos));
-                             }
-                             bool hitCollider = colliderList.Any(collider => collider.bounds.Contains(vertWorldPos)); // is this vert inside of a collider
-                 //Debug.Log("1: x "+ onXAxis);
-                 //Debug.Log("1: y "+ onZAxis);
-                 Debug.Log("1: Collider "+ hitCollider);
-                             if (!onXAxis || !onZAxis || hitCollider) { // not save to place!
-                                 return false;
-                             }
-                         }
-                     }
-                     return true;                        
-     }*/
-
         //-----------------------------------------+Buildin Placement--------------------------------------------//
         //------------------------------------------ Highlights Range Indicator--------------------------------------------//
         private void RangeIndicatorDisplay() {
@@ -424,7 +379,6 @@ namespace HOME.Game {
             if (!_isGameOver) {// check if we have set IsGameOver to true, only run this logic once
                 foreach (var u in activePlayers) {
                     if (!u.isAi && u.ActiveUnits.Count <= 0) {
-                        Debug.Log("GameManager CheckEndGame No active Player Units! Game Over!");
                         _isGameOver = true;
                         iWon = false;
                         return;
@@ -464,7 +418,6 @@ namespace HOME.Game {
             float fadeDelay = (_loseTransitionPrefaN != null) ? _loseTransitionPrefaN.Delay + _loseTransitionPrefaN.FadeOnDuration : 0f;
             yield return new WaitForSeconds(fadeDelay);
             LoseMenu.Open();
-            Debug.Log("GameManager LoseRoutine(): LoseMenu.Open()");
         }
 
         private IEnumerator WinRoutine() {
@@ -472,7 +425,6 @@ namespace HOME.Game {
             float fadeDelay = (_winTransitionPrefaN != null) ? _winTransitionPrefaN.Delay + _winTransitionPrefaN.FadeOnDuration : 0f;
             yield return new WaitForSeconds(fadeDelay);
             WinMenu.Open();
-            Debug.Log("GameManager WinRoutine(): WinMenu.Open()");
         }
 
         public void ResetGame() { //dont need it?
@@ -482,7 +434,6 @@ namespace HOME.Game {
             // clear Spawnpoints if we come from previous game
             _humanSpawnLocations.Clear();
             _aISpawnLocations.Clear();
-            Debug.Log("RESET");
         }
 
         private void OnDestroy() {
