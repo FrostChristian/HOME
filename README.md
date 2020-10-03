@@ -1,3 +1,3 @@
 # Final Year Project (HOME)
 
-Find Game Scripts here: (Assets/_HOME/1.Scripts/Game)
+Find Game Scripts [here](Assets/_HOME/1.Scripts/Game)
